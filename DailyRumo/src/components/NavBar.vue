@@ -3,7 +3,7 @@
       <router-link to="/">Home</router-link>
       <router-link to="/daily">Sobre</router-link>
       <router-link to="/goals">Contacto</router-link>
-      <router-link to="/profile">Login</router-link>
+      <router-link to="/login">Login</router-link>
     </nav>
   </template>
   

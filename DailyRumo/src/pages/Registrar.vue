@@ -3,37 +3,33 @@ import { ref } from "vue";
 import { useAuthStore } from "../stores/authStore";
 import { useRouter } from "vue-router";
 
+const name = ref("");
 const email = ref("");
 const password = ref("");
-const error = ref("");
 
 const auth = useAuthStore();
 const router = useRouter();
 
-const doLogin = async () => {
-  try {
-    await auth.login(email.value, password.value);
-    router.push("/");
-  } catch (e) {
-    error.value = e.message;
-  }
+const doRegister = async () => {
+  await auth.register(name.value, email.value, password.value);
+  router.push("/");
 };
 </script>
 
 <template>
     <div class="auth-container">
-  <div class="login-container">
-    <h1>Login</h1>
+  <div class="register-container">
+    <h1>Criar Conta</h1>
 
-    <form @submit.prevent="doLogin">
+    <form @submit.prevent="doRegister">
+      <input v-model="name" placeholder="Nome" required />
       <input v-model="email" type="email" placeholder="Email" required />
       <input v-model="password" type="password" placeholder="Password" required />
-      <button type="submit">Entrar</button>
+
+      <button type="submit">Criar Conta</button>
     </form>
 
-    <p class="error" v-if="error">{{ error }}</p>
-
-    <router-link to="/register">Criar Conta</router-link>
+    <router-link to="/login">Já tens conta? Entrar</router-link>
   </div>
     </div>
 </template>
@@ -44,7 +40,7 @@ const doLogin = async () => {
   margin: 80px auto;
   padding: 30px;
   border-radius: 12px;
-  background: #8b39b1cc;
+  background: #ffffffcc;
   backdrop-filter: blur(6px);
   box-shadow: 0px 4px 15px rgba(0, 0, 0, .1);
 }

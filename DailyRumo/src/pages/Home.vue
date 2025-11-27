@@ -62,7 +62,6 @@
      </template>
 
 <style scoped>
-/* 👇 TODO O TEU CSS ANTIGO VEM PARA AQUI */
 
 .container {
   display: flex;
