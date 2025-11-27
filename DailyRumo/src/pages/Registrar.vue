@@ -11,7 +11,7 @@ const auth = useAuthStore();
 const router = useRouter();
 
 const doRegister = async () => {
-  await auth.register(name.value, email.value, password.value);
+  await auth.registrar(name.value, email.value, password.value);
   router.push("/");
 };
 </script>
