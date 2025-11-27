@@ -24,7 +24,7 @@ const doRegister = async () => {
     <form @submit.prevent="doRegister">
       <input v-model="name" placeholder="Nome" required />
       <input v-model="email" type="email" placeholder="Email" required />
-      <input v-model="password" type="password" placeholder="Password" required />
+      <input v-model="password" type="password" placeholder="Password" required/>
 
       <button type="submit">Criar Conta</button>
     </form>

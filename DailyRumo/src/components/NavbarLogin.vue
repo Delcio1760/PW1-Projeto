@@ -1,11 +1,21 @@
 <template>
     <nav class="navBar">
       <router-link to="/">Home</router-link>
-      <router-link to="/daily">Sobre</router-link>
-      <router-link to="/goals">Contacto</router-link>
-      <router-link to="/login">Login</router-link>
+      <router-link to="/sobre">Sobre</router-link>
+      <router-link to="/contacto">Contacto</router-link>
+      <router-link to="/login" @click="logout">Logout</router-link>
     </nav>
   </template>
+
+<script setup>
+import { useAuthStore } from "../stores/authStore";
+
+const auth = useAuthStore();
+
+const logout = () => {
+  auth.logout();
+};
+</script>
   
   <style scoped>
   .navBar {
