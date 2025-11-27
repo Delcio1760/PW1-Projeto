@@ -39,58 +39,55 @@ const doRegister = async () => {
   width: 380px;
   margin: 80px auto;
   padding: 30px;
-  border-radius: 12px;
-  background: #ffffffcc;
-  backdrop-filter: blur(6px);
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, .1);
+  
+  border-radius: 16px;
+  background: rgba(20, 0, 40, 0.8);
+
+  border: 2px solid #8b2cff;
+  box-shadow: 0 0 25px #8b2cffaa, inset 0 0 15px #4c00aa;
+
+  backdrop-filter: blur(8px);
+
+  color: white;
+  text-align: center;
 }
 
 .auth-container h1 {
-  text-align: center;
+  color: #d2a8ff;
   margin-bottom: 20px;
-  font-size: 26px;
-}
-
-.auth-container form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  text-shadow: 0 0 10px #8b2cff;
 }
 
 .auth-container input {
+  width: 100%;
   padding: 12px;
+  margin: 10px 0;
   border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 16px;
+  border: 1px solid #8b2cff;
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
 }
 
 .auth-container button {
   width: 100%;
   padding: 12px;
-  margin-top: 10px;
-  border-radius: 8px;
+  margin-top: 15px;
+
+  background: linear-gradient(135deg, #8b2cff, #4c00aa);
   border: none;
-  background: #4f46e5;
+  border-radius: 8px;
+
   color: white;
+  font-weight: bold;
+  letter-spacing: 1px;
+
   cursor: pointer;
-  font-size: 16px;
   transition: 0.3s;
 }
 
 .auth-container button:hover {
-  background: #4338ca;
+  box-shadow: 0 0 15px #b366ff;
+  transform: translateY(-2px);
 }
 
-.auth-container a {
-  display: block;
-  margin-top: 15px;
-  text-align: center;
-  color: #4f46e5;
-}
-
-.error {
-  color: red;
-  text-align: center;
-  margin-top: 10px;
-}
 </style>
