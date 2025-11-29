@@ -17,6 +17,8 @@ const doRegister = async () => {
 </script>
 
 <template>
+  <div class="page-background">
+    <img alt="background image" src="@/assets/hajime.jpeg" class="background-image" />
     <div class="auth-container">
   <div class="register-container">
     <h1>Criar Conta</h1>
@@ -32,9 +34,28 @@ const doRegister = async () => {
     <router-link to="/login">Já tens conta? Entrar</router-link>
   </div>
     </div>
+  </div>
 </template>
 
 <style scoped>
+.page-background{
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.background-image {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  filter: brightness(0.5);
+}
 .auth-container {
   width: 380px;
   margin: 80px auto;
