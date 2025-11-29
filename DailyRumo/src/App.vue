@@ -8,10 +8,10 @@ const auth = useAuthStore();
 
 <template>
   <div>
-    <!-- Se o utilizador estiver logado -->
+    <!--user logado-->
     <NavbarLogin v-if="auth.user" />
 
-    <!-- Se não estiver logado -->
+    <!--User não logado-->
     <NavBar v-else />
 
     <router-view />

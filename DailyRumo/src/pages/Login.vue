@@ -21,6 +21,8 @@ const doLogin = async () => {
 </script>
 
 <template>
+  <div class="page-background">
+    
     <div class="auth-container">
   <div class="login-container">
     <h1>Login</h1>
@@ -36,9 +38,19 @@ const doLogin = async () => {
     <router-link to="/register">Criar Conta</router-link>
   </div>
     </div>
+  </div>
 </template>
 
 <style scoped>
+.page-background{
+  width: 100vw;
+  height: 100vh;
+  background: url("@/assets/ippo.gif") no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .auth-container {
   width: 380px;
   margin: 80px auto;
