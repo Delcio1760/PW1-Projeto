@@ -1,6 +1,26 @@
 <script setup>
+import { ref } from 'vue';
+import { useAuthStore } from "../stores/authStore";
+import { useRouter } from "vue-router";
+import Popup from "../components/PopUp.vue";
 
+const authStore = useAuthStore();
+const router = useRouter();
+
+const showPopup = ref(false);
+const popupMessage = ref("");
+
+const openCategory = (category) => {
+  if (!authStore.user) {
+    popupMessage.value = "⚠ Precisa fazer login para aceder a esta secção.";
+    showPopup.value = true;
+    return;
+  }
+
+  router.push(`/habits/${category}`);
+};
 </script>
+
 
 <template>
     <div class="container">
@@ -15,7 +35,7 @@
     
      <div class="cardsContainer">
     
-       <div class="card">
+       <div class="card" @click="openCategory('daily')">
          <img class="cardimg" alt="Icone de tarefas" src="../assets/card1Img.png" />
          <h2>Daily</h2>
          <ul>
@@ -25,7 +45,7 @@
          </ul>
        </div>
     
-       <div class="card">
+       <div class="card" @click="openCategory('planners')">
          <img class="cardimg" alt="I­cone de metas" src="../assets/card2Img.png" />
          <h2>Planners</h2>
          <ul>
@@ -35,7 +55,7 @@
          </ul>
        </div>
     
-       <div class="card">
+       <div class="card" @click="openCategory('personal')">
          <img class="cardimg" alt="I­cone de finanças" src="../assets/card3Img.png" />
          <h2>Personal</h2>
          <ul>
@@ -45,7 +65,7 @@
          </ul>
        </div>
     
-       <div class="card">
+       <div class="card" @click="openCategory('goals')">
          <img class="cardimg" alt="I­cone de produtividade" src="../assets/card4Img.png" />
          <h2>Goals</h2>
          <ul>
@@ -55,10 +75,14 @@
          </ul>
        </div>
     
-     </div> <!-- FECHO DA cardsContainer -->
-    
-    </div> <!-- FECHO DA container -->
-    
+     </div>
+     
+     <Popup 
+  v-if="showPopup" 
+  :message="popupMessage" 
+  @close="router.push('/login')"/>
+
+    </div> 
      </template>
 
 <style scoped>
