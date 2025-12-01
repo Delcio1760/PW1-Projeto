@@ -39,55 +39,148 @@ const goToCreate = () => {
 </script>
 
 <template>
-     <div class="container">
-    <h1 class="title">Hábitos – {{ category }}</h1>
+    <div class="main-container">
 
-    <button class="btn" @click="goToCreate">➕ Criar Hábito</button>
+       <header class="page-header">
+           <h1 class="title"> Meus Hábitos – {{ category.toUpperCase() }}</h1>
+           <p class="subtitle">Aqui pode visualizar, criar e gerir os seus hábitos de {{ category.toLowerCase() }}.</p>
 
-    <div v-if="habits.length === 0" class="empty">
-      Nenhum hábito ainda nesta categoria.
-    </div>
+           <button class="add-btn" @click="goToCreate">
+               <span class="plus-icon">➕</span> Criar Novo Hábito
+           </button>
+       </header>
 
-    <div class="list">
-      <div v-for="habit in habits" :key="habit.id" class="habit">
-        <h2>{{ habit.name }}</h2>
-        <p>Início: {{ habit.start }}</p>
-        <p>Fim: {{ habit.end }}</p>
-      </div>
-    </div>
+       <div v-if="habits.length === 0" class="empty-state">
+           <p>Parece que ainda não tem hábitos de **{{ category.toUpperCase() }}**.</p>
+           <p>Clique em **"Criar Novo Hábito"** para começar a tua jornada!</p>
+       </div>
 
-    <Popup
-      v-if="showPopup"
-      :message="popupMsg"
-      @close="router.push('/login')"
-    />
-  </div>
+       <div class="habits-grid">
+           <div v-for="habit in habits" :key="habit.id" class="habit-card">
+               <h2 class="habit-name">{{ habit.name }}</h2>
+               <div class="habit-details">
+                   <p><span>Início:</span> {{ habit.start }}</p>
+                   <p><span> Fim:</span> {{ habit.end }}</p>
+               </div>
+               </div>
+       </div>
+
+       <Popup
+         v-if="showPopup"
+         :message="popupMsg"
+         @close="router.push('/login')"
+       />
+   </div>
 </template>
 
 <style scoped>
-.container {
+/* 1. CONTAINER E BACKGROUND GERAL */
+.main-container {
   padding: 40px;
   min-height: 100vh;
-  background: linear-gradient(135deg, #150015, #2b005e);
+  background: linear-gradient(135deg, #0e0018, #180536); 
   color: white;
+  font-family: Arial, sans-serif;
 }
 
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 300px;
+/* 2. CABEÇALHO DA PÁGINA */
+.page-header {
+    margin-bottom: 40px;
+    border-bottom: 1px solid #3a0e63; 
+    padding-bottom: 20px;
 }
 
-input, button {
-  padding: 10px;
-  border-radius: 8px;
+.title {
+  font-size: 32px;
+  margin-bottom: 5px;
+  color: #c9a0ff; 
+}
+
+.subtitle {
+    font-size: 16px;
+    color: #ccc;
+    margin-bottom: 20px;
+}
+
+/* 3. BOTÃO DE CRIAÇÃO */
+.add-btn {
+  background: linear-gradient(90deg, #8a2be2, #a052ff); 
+  color: white;
+  padding: 12px 25px;
   border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: inline-flex;
+  align-items: center;
 }
 
-button {
-  background: purple;
-  color: white;
-  cursor: pointer;
+.add-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
+}
+
+.plus-icon {
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+/* 4. ESTADO VAZIO */
+.empty-state {
+    background-color: #1a1a1a;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    color: #ccc;
+    border: 2px dashed #4b0082;
+    margin-top: 30px;
+}
+.empty-state p {
+    margin: 5px 0;
+}
+
+/* 5. LISTA DE HÁBITOS (GRID) */
+.habits-grid {
+    display: grid;
+    /* 3 colunas em telas maiores, 1 coluna em telas pequenas */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.habit-card {
+    background-color: #1a1a1a; 
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
+    border-left: 5px solid #8a2be2; 
+    transition: transform 0.3s ease;
+}
+
+.habit-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+}
+
+.habit-name {
+    font-size: 22px;
+    color: #c9a0ff; 
+    margin-bottom: 10px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 8px;
+}
+
+.habit-details p {
+    font-size: 14px;
+    margin: 5px 0;
+    color: #ccc;
+}
+
+.habit-details span {
+    font-weight: bold;
+    color: white;
+    margin-right: 5px;
 }
 </style>
