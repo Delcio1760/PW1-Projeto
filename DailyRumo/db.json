@@ -6,7 +6,23 @@
       "email": "delcio@exemplo.com",
       "password": "1234",
       "level": 2,
-      "xp": 120
+      "xp": 120,
+      "habits": [
+        {
+          "id": 1764554003493,
+          "name": "Ler Livro : 48 Laws of Power",
+          "start": "2025-12-01",
+          "end": "2026-03-01",
+          "category": "personal"
+        },
+        {
+          "id": 1764554038466,
+          "name": "Ler Livro : 48 Laws of Power",
+          "start": "2025-12-01",
+          "end": "2025-12-31",
+          "category": "personal"
+        }
+      ]
     },
     {
       "id": "2",
@@ -48,6 +64,5 @@
       "level": 2,
       "xp": 180
     }
-    
   ]
 }
