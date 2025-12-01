@@ -6,17 +6,8 @@
       "email": "delcio@exemplo.com",
       "password": "1234",
       "level": 2,
-      "xp": 120,
-      "habits": [
-        {
-          "id": 1764554003493,
-          "name": "Ler Livro : 48 Laws of Power",
-          "start": "2025-12-01",
-          "end": "2026-03-01",
-          "category": "personal"
-        }
-        
-      ]
+      "xp": 120
+      
     },
     {
       "id": "2",
@@ -57,6 +48,64 @@
       "password": "1234",
       "level": 2,
       "xp": 180
+    }
+  ],
+  
+  
+  
+  "habits": [
+    
+    {
+      "id": 1,
+      "userId": "1",
+      "name": "Ler Livro: 48 Laws of Power",
+      "start": "2025-12-01",
+      "end": "2026-03-01",
+      "category": "personal"
+    },
+    {
+      "id": 2,
+      "userId": "1",
+      "name": "Beber 3L de água",
+      "start": "2025-12-01",
+      "end": "2025-12-31",
+      "category": "daily"
+    },
+    {
+      "id": 3,
+      "userId": "1",
+      "name": "Planeamento Semanal",
+      "start": "2025-12-01",
+      "end": "2026-06-01",
+      "category": "planners"
+    },
+
+  
+    {
+      "id": 4,
+      "userId": "3",
+      "name": "Correr 5km, 3x por semana",
+      "start": "2025-12-15",
+      "end": "2026-05-01",
+      "category": "goals"
+    },
+    {
+      "id": 5,
+      "userId": "3",
+      "name": "Poupar 200€ por mês",
+      "start": "2025-12-01",
+      "end": "2026-12-31",
+      "category": "personal"
+    },
+    
+    
+    {
+      "id": 6,
+      "userId": "4",
+      "name": "Diário: Escrever 500 palavras",
+      "start": "2025-11-20",
+      "end": "2026-01-31",
+      "category": "daily"
     }
   ]
 }

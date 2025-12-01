@@ -17,35 +17,36 @@ const error = ref("");
 const success = ref("");
 
 const createHabit = async () => {
-    if (!authStore.user) {
-        error.value = "Precisa fazer login.";
-        return router.push('/login');
-    }
+   if(!authStore.user){
+       error.value = "⚠ Precisa estar logado para criar hábitos.";
+       return;
+   }
 
-    // Criar objeto do hábito
-    const newHabit = {
-        id: Date.now(),
-        name: habitName.value,
-        start: start.value,
-        end: end.value,
-        category
-    };
+   const newHabit = {
+    name: habitName.value,
+    start: start.value,
+    end: end.value,category,
+    userId: authStore.user.id
+   };
 
-    // Guardar no utilizador
-    const updatedUser = {   // Aqui estamos a criar um novo objeto de utilizador com o hábito adicionado
-        ...authStore.user,
-        habits: [...(authStore.user.habits || []), newHabit]  // Adiciona o novo hábito à lista existente
-    };
-
-    // Atualizar na API
-    await fetch(`http://localhost:3000/users/${authStore.user.id}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updatedUser)
+   try{
+    const response = await fetch('http://localhost:3000/habits', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newHabit)
     });
-
-    success.value = "Hábito criado com sucesso!";
+    if(!response.ok){
+        throw new Error("Erro ao criar hábito. Tente novamente.");
+    }
+    success.value = "✅ Hábito criado com sucesso!";
+    error.value = "";
     router.push(`/habits/${category}`);
+   }catch(error){
+    success.value = "";
+    error.value = error.message;
+   }
 };
 </script>
 

@@ -2,6 +2,8 @@
 import NavBar from "./components/NavBar.vue";
 import NavbarLogin from "./components/NavbarLogin.vue";
 import { useAuthStore } from "./stores/authStore";
+import { useRoute } from 'vue-router';
+const $route = useRoute();
 
 const auth = useAuthStore();
 </script>
@@ -14,7 +16,7 @@ const auth = useAuthStore();
     <!--User não logado-->
     <NavBar v-else />
 
-    <router-view />
+    <router-view :key="$route.fullPath" /> 
   </div>
 </template>
 
