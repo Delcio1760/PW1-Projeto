@@ -32,9 +32,9 @@ const createHabit = async () => {
     };
 
     // Guardar no utilizador
-    const updatedUser = {
+    const updatedUser = {   // Aqui estamos a criar um novo objeto de utilizador com o hábito adicionado
         ...authStore.user,
-        habits: [...(authStore.user.habits || []), newHabit]
+        habits: [...(authStore.user.habits || []), newHabit]  // Adiciona o novo hábito à lista existente
     };
 
     // Atualizar na API
