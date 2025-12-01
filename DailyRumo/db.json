@@ -7,7 +7,6 @@
       "password": "1234",
       "level": 2,
       "xp": 120
-      
     },
     {
       "id": "2",
@@ -50,13 +49,9 @@
       "xp": 180
     }
   ],
-  
-  
-  
   "habits": [
-    
     {
-      "id": 1,
+      "id": "1",
       "userId": "1",
       "name": "Ler Livro: 48 Laws of Power",
       "start": "2025-12-01",
@@ -64,7 +59,7 @@
       "category": "personal"
     },
     {
-      "id": 2,
+      "id": "2",
       "userId": "1",
       "name": "Beber 3L de água",
       "start": "2025-12-01",
@@ -72,17 +67,15 @@
       "category": "daily"
     },
     {
-      "id": 3,
+      "id": "3",
       "userId": "1",
       "name": "Planeamento Semanal",
       "start": "2025-12-01",
       "end": "2026-06-01",
       "category": "planners"
     },
-
-  
     {
-      "id": 4,
+      "id": "4",
       "userId": "3",
       "name": "Correr 5km, 3x por semana",
       "start": "2025-12-15",
@@ -90,22 +83,28 @@
       "category": "goals"
     },
     {
-      "id": 5,
+      "id": "5",
       "userId": "3",
       "name": "Poupar 200€ por mês",
       "start": "2025-12-01",
       "end": "2026-12-31",
       "category": "personal"
     },
-    
-    
     {
-      "id": 6,
+      "id": "6",
       "userId": "4",
       "name": "Diário: Escrever 500 palavras",
       "start": "2025-11-20",
       "end": "2026-01-31",
       "category": "daily"
+    },
+    {
+      "id": "3d5a",
+      "name": "Aprender Alemão",
+      "start": "2025-12-01",
+      "end": "2026-12-01",
+      "category": "goals",
+      "userId": "1"
     }
   ]
 }

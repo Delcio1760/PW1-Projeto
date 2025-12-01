@@ -183,4 +183,63 @@ const goToCreate = () => {
     color: white;
     margin-right: 5px;
 }
+
+/* 5. LISTA DE HÁBITOS (GRID) */
+.habits-grid {
+    display: grid;
+    /* 3 colunas em telas maiores, 1 coluna em telas pequenas */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+    gap: 25px;
+    margin-top: 30px;
+}
+
+/* ESTILO PARA O CARTÃO INDIVIDUAL */
+.habit-card {
+    background-color: #1f1f1f; /* Fundo do cartão ligeiramente mais claro que o background */
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); /* Sombra mais visível */
+    border-left: 6px solid #a052ff; /* Linha de destaque roxa vibrante */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex; /* Usar flexbox para melhor organização interna */
+    flex-direction: column;
+}
+
+.habit-card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 10px 20px rgba(160, 82, 255, 0.15); 
+}
+
+.habit-name {
+    font-size: 22px;
+    color: #e6e6fa; 
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #333; 
+    font-weight: bold;
+}
+
+.habit-details {
+    margin-top: auto; 
+}
+
+.habit-details p {
+    font-size: 14px;
+    margin: 8px 0;
+    color: #b0b0b0; 
+    display: flex;
+    align-items: center;
+}
+
+.habit-details span {
+    font-weight: bold;
+    color: white;
+    margin-right: 5px;
+    font-size: 16px; 
+}
+
+
+.habit-name + .habit-details {
+    margin-top: 0;
+}
 </style>
