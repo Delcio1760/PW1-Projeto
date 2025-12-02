@@ -105,6 +105,14 @@
       "end": "2026-12-01",
       "category": "goals",
       "userId": "1"
+    },
+    {
+      "id": "b6ce",
+      "name": "Correr 10Km",
+      "start": "2025-12-02",
+      "end": "2025-12-21",
+      "category": "daily",
+      "userId": "1"
     }
   ]
 }
