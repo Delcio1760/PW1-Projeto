@@ -8,6 +8,7 @@ const Contacto = () => import('../pages/Contacto.vue')
 const Login = () => import('../pages/Login.vue')
 const CreateHabit = () => import("../pages/CreateHabit.vue")
 const HabitsCategory = () => import("../pages/HabitsCategory.vue")
+const Profile = () => import("../pages/Perfil.vue")
 
 const routes = [
   { path: '/', component: Home },
@@ -15,6 +16,7 @@ const routes = [
   { path: '/contacto', component: Contacto },
   { path: "/login", component: Login },
   { path: "/register", component: Registrar},
+  {path:"/perfil", component: Profile},
   
   {path: "/habits/:category",
     name : "HabitsByCategory",

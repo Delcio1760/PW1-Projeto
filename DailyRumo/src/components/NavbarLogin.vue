@@ -4,10 +4,12 @@
       <router-link to="/sobre">Sobre</router-link>
       <router-link to="/contacto">Contacto</router-link>
       <router-link to="/login" @click="logout">Logout</router-link>
+      <router-link to="/perfil">Perfil</router-link>
     </nav>
   </template>
 
 <script setup>
+import router from "@/router";
 import { useAuthStore } from "../stores/authStore";
 
 const auth = useAuthStore();
