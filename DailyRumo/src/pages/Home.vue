@@ -17,7 +17,10 @@ const openCategory = (category) => {
     return;
   }
 
-  router.push(`/habits/${category}`);
+  router.push({
+    name: 'HabitsCategory',
+    params: {category : category }
+  })
 };
 </script>
 

@@ -18,16 +18,16 @@ const routes = [
   { path: "/register", component: Registrar},
   {path:"/perfil", component: Profile},
   
-  {path: "/habits/:category",
-    name : "HabitsByCategory",
-    component: HabitsCategory,
-    props: true
-  },
-
   {
     path: "/habits/:category/create",
     name: "CreateHabit",
     component: CreateHabit,
+    props: true
+  },
+
+  {path: "/habits/:category",
+    name : "HabitsCategory",
+    component: HabitsCategory,
     props: true
   }
 ]

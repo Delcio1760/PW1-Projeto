@@ -1,32 +1,58 @@
 <script setup>
 import { ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { useRouter } from 'vue-router'; // useRoute removido
 import { useAuthStore } from '@/stores/authStore'; 
+import { onMounted, defineProps } from 'vue';
 
-const route = useRoute();
+const props = defineProps({
+  category: {
+    type: String,
+    required: true
+  }
+})
+
+// const route = useRoute(); // REMOVIDO
 const router = useRouter();
 
-const category = route.params.category;
 const authStore = useAuthStore();
 
 const habitName = ref('');
 const start = ref('');
 const end = ref('');
 
+const startTime = ref('');
+const endTime = ref('');
+
+const goalValue = ref(1);
+const goalUnit = ref('vez/dia');
+
 const error = ref("");
 const success = ref("");
 
+onMounted(()=>{
+  if(!authStore.user){
+    router.push('/login');
+  }
+})
+
 const createHabit = async () => {
    if(!authStore.user){
-       error.value = "⚠ Precisa estar logado para criar hábitos.";
+       // CORREÇÃO DE ENCODING
+       error.value = "⚠️ Precisa estar logado para criar hábitos.";
        return;
    }
 
    const newHabit = {
     name: habitName.value,
     start: start.value,
-    end: end.value,category,
-    userId: authStore.user.id
+    end: end.value,
+    category: props.category,
+    userId: authStore.user.id,
+    startTime: startTime.value || '00:00',
+    endTime: endTime.value || '23:59',
+
+    goalValue: goalValue.value,
+    goalUnit: goalUnit.value
    };
 
    try{
@@ -38,12 +64,19 @@ const createHabit = async () => {
         body: JSON.stringify(newHabit)
     });
     if(!response.ok){
+        // CORREÇÃO DE ENCODING
         throw new Error("Erro ao criar hábito. Tente novamente.");
     }
+    // CORREÇÃO DE ENCODING
     success.value = "✅ Hábito criado com sucesso!";
+    habitName.value = "";
+    startTime.value = "";
+    endTime.value = "";
+    goalValue.value = 1;
     error.value = "";
-    router.push(`/habits/${category}`);
-   }catch(error){
+    router.push(`/habits/${props.category}`);
+   
+  }catch(error){
     success.value = "";
     error.value = error.message;
    }
@@ -51,65 +84,100 @@ const createHabit = async () => {
 </script>
 
 <template>
-    <div class="background-container"> 
-      
-      <div class="card-form">
-  
-          <h1>✨ Criar Hábito</h1>
-  
-          <div class="category-tag">Categoria: {{ category.toUpperCase() }}</div>
-  
-          <form @submit.prevent="createHabit" class="habit-form">
+  <div class="main-container"> 
+    
+    <h1 class="page-header">✨ Criar Hábito</h1>
+
+    <div class="form-card">
+      <form @submit.prevent="createHabit">
+        
+        <div class="section-group">
+          <label for="habit-name" class="label-title">Nome do Hábito</label>
+          <input type="text" id="habit-name" v-model="habitName" required placeholder="Ex: Beber 3L de água" class="input-field">
+        </div>
+
+        <div class="section-group">
+          <label class="label-title">Meta (Goal)</label>
+          <div class="goal-input-group">
             
-            <div class="input-group">
-              <label for="habit-name">Nome</label>
-              <input 
-                v-model="habitName" 
-                type="text" 
-                id="habit-name"
-                placeholder="Ex: Beber 2L de água" 
-                required 
-              />
-            </div>
-  
-            <div class="input-group">
-              <label for="start-date">Data de Início</label>
-              <input v-model="start" type="date" id="start-date" required />
-            </div>
+            <input type="number" v-model.number="goalValue" min="1" required class="input-field goal-value-input">
             
-            <div class="input-group">
-              <label for="end-date">Data Limite</label>
-              <input v-model="end" type="date" id="end-date" required />
-            </div>
-  
-            <button type="submit" class="submit-btn">
-               Salvar Hábito
-            </button>
-          </form>
-  
-          <p v-if="error" class="error">{{ error }}</p>
-          <p v-if="success" class="success">{{ success }}</p>
+            <select v-model="goalUnit" class="input-field goal-unit-select">
+                <option value="vez/dia">vez/dia</option>
+                <option value="vezes/semana">vezes/semana</option>
+                <option value="minutos">minutos</option>
+                <option value="páginas">páginas</option>
+            </select>
+            
+          </div>
+        </div>
+        
+        <div class="section-group">
+          <label class="label-title">Período e Horário</label>
           
-          <button @click="router.back()" class="back-btn">Cancelar</button>
-      </div>
+          <div class="date-input-group">
+            <div class="date-field">
+                <label for="start-date">📅 Data Início</label>
+                <input type="date" id="start-date" v-model="start" required class="input-field">
+            </div>
+            <div class="date-field">
+                <label for="end-date">🚩 Data Fim</label>
+                <input type="date" id="end-date" v-model="end" required class="input-field">
+            </div>
+          </div>
+
+          <div class="date-input-group mt-3">
+             <div class="date-field">
+                <label for="start-time">⌚ Hora Início</label>
+                <input type="time" id="start-time" v-model="startTime" class="input-field">
+            </div>
+            <div class="date-field">
+                <label for="end-time">⏱️ Hora Limite</label>
+                <input type="time" id="end-time" v-model="endTime" class="input-field">
+            </div>
+          </div>
+
+        </div>
+
+        <div class="section-group">
+          <label class="label-title">Categoria</label>
+          <p class="category-display">{{ props.category.toUpperCase() }}</p>
+        </div>
+
+        <p v-if="error" class="error-msg">{{ error }}</p>
+        <p v-if="success" class="success-msg">{{ success }}</p>
+
+        <button type="submit" class="submit-btn">
+          <span class="icon">✔️</span> Salvar Hábito
+        </button>
+        
+      </form>
     </div>
-  </template>
+  </div> 
+</template>
 
 <style scoped>
-/*  ESTILO DO BACKGROUND GERAL */
-.background-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #0f0f0f, #1e0b3e); 
-  padding: 20px;
+/* 1. BACKGROUND GERAL E CONTAINER PRINCIPAL */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f0f0f, #1e0b3e);
 }
 
-/*  ESTILO DA CAIXA FLUTUANTE (O CARTÃO) */
-.card-form {
-  width: 90%;
-  max-width: 450px;
+.page-header {
+    font-size: 36px;
+    color: #c37eff; /* Cor roxa primária */
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+/* 2. CARD PRINCIPAL (form-card) */
+.form-card {
+  width: 100%;
+  max-width: 600px; /* Largura para acomodar bem os campos */
   background-color: #1a1a1a; 
   border-radius: 20px;
   padding: 30px;
@@ -117,115 +185,115 @@ const createHabit = async () => {
               0 0 0 4px rgba(70, 0, 100, 0.5); 
   color: white;
   text-align: left;
-  animation: fadeIn 0.5s ease-out;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-h1 {
-  font-size: 28px;
-  margin-bottom: 10px;
-  border-bottom: 2px solid #333;
-  padding-bottom: 10px;
-}
-
-.category-tag {
-    display: inline-block;
-    background-color: #333;
-    padding: 5px 10px;
-    border-radius: 10px;
-    font-size: 14px;
-    font-weight: bold;
-    color: #a878ff; 
+/* 3. ESTILO DOS GRUPOS DE SECÇÕES */
+.section-group {
     margin-bottom: 25px;
+    padding: 15px;
+    background-color: #2b2b2b;
+    border-radius: 10px;
+    border-left: 5px solid #a052ff; /* Roxo primário */
 }
 
-/* ESTILO DO FORMULÁRIO E INPUTS */
-.habit-form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.input-group {
-    display: flex;
-    flex-direction: column;
-}
-
-.input-group label {
+.label-title {
+    display: block;
     font-size: 14px;
-    margin-bottom: 5px;
-    color: #ccc;
+    color: #c37eff;
+    margin-bottom: 8px;
     font-weight: bold;
 }
 
-input {
-  background-color: #2b2b2b; 
-  border: 1px solid #444;
-  border-radius: 10px;
-  padding: 12px 15px;
-  color: white;
-  font-size: 16px;
-  transition: border-color 0.3s, box-shadow 0.3s;
+.input-field {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #444;
+    border-radius: 8px;
+    background-color: #333;
+    color: white;
+    font-size: 16px;
+    box-sizing: border-box;
 }
 
-input:focus {
-  border-color: #9955ff; 
-  box-shadow: 0 0 0 3px rgba(153, 85, 255, 0.4);
-  outline: none;
+.input-field:focus {
+    border-color: #9955ff;
+    box-shadow: 0 0 0 3px rgba(153, 85, 255, 0.4);
+    outline: none;
 }
 
-/*  ESTILO DO BOTÃO PRINCIPAL */
+/* 4. ESTILOS DE GOAL E DATAS/HORAS */
+.goal-input-group, .date-input-group {
+    display: flex;
+    gap: 15px;
+}
+
+.goal-value-input {
+    width: 30%;
+    text-align: center;
+}
+
+.goal-unit-select {
+    width: 70%;
+}
+
+.date-field {
+    flex: 1;
+}
+
+.date-field label {
+    display: block;
+    color: #ccc;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.mt-3 {
+    margin-top: 15px;
+}
+
+.category-display {
+    background-color: #a052ff;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 6px;
+    display: inline-block;
+    font-weight: bold;
+}
+
+/* 5. ESTILO DO BOTÃO SUBMIT */
 .submit-btn {
-  background: linear-gradient(90deg, #9955ff, #c37eff); 
-  color: white;
-  padding: 15px;
-  border: none;
-  border-radius: 10px;
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-  margin-top: 15px;
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(90deg, #9955ff, #c37eff);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-top: 25px;
 }
 
 .submit-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(153, 85, 255, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(153, 85, 255, 0.4);
 }
 
-.back-btn {
-    background: none;
-    color: #aaa;
-    border: none;
-    padding: 10px;
-    margin-top: 15px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: color 0.2s;
-}
-
-.back-btn:hover {
-    color: white;
-}
-
-/* 5. MENSAGENS DE ERRO/SUCESSO */
-.error, .success {
+/* 6. MENSAGENS DE FEEDBACK */
+.error-msg, .success-msg {
     margin-top: 15px;
     padding: 10px;
     border-radius: 8px;
     text-align: center;
     font-weight: bold;
 }
-.error { 
+.error-msg { 
     background-color: #4f0000; 
     color: #ff8888; 
     border: 1px solid #ff0000;
 }
-.success { 
+.success-msg { 
     background-color: #004f00; 
     color: #88ff88; 
     border: 1px solid #00ff00;
