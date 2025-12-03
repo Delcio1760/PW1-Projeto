@@ -1,5 +1,5 @@
 {
-  "users": [
+  "users": [ 
     {
       "id": "1",
       "nome": "Delcio",
@@ -49,7 +49,7 @@
       "xp": 180
     }
   ],
-  "habits": [
+  "habits": [   
     {
       "id": "1",
       "userId": "1",
@@ -126,5 +126,6 @@
       "goalValue": 1,
       "goalUnit": "vez/dia"
     }
-  ]
+  ],
+  "completions": []  
 }
