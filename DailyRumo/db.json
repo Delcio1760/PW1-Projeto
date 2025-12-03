@@ -113,6 +113,18 @@
       "end": "2025-12-21",
       "category": "daily",
       "userId": "1"
+    },
+    {
+      "id": "b600",
+      "name": "Aprender Alemão",
+      "start": "2025-12-03",
+      "end": "2025-12-22",
+      "category": "daily",
+      "userId": "1",
+      "startTime": "00:00",
+      "endTime": "23:59",
+      "goalValue": 1,
+      "goalUnit": "vez/dia"
     }
   ]
 }

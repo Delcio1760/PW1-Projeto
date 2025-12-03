@@ -37,7 +37,7 @@ onMounted(()=>{
 
 const createHabit = async () => {
    if(!authStore.user){
-       // CORREÇÃO DE ENCODING
+      
        error.value = "⚠️ Precisa estar logado para criar hábitos.";
        return;
    }
@@ -67,7 +67,7 @@ const createHabit = async () => {
         // CORREÇÃO DE ENCODING
         throw new Error("Erro ao criar hábito. Tente novamente.");
     }
-    // CORREÇÃO DE ENCODING
+    
     success.value = "✅ Hábito criado com sucesso!";
     habitName.value = "";
     startTime.value = "";
