@@ -2,6 +2,20 @@
 import { ref, onMounted, defineProps } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/authStore';
+import { computed } from 'vue';
+
+const isHabitFinished = computed(() => {
+  if (!habit.value?.end) return false;
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const endDate = new Date(habit.value.end);
+  endDate.setHours(0, 0, 0, 0);
+
+  return today > endDate;
+});
+
 
 
 const router = useRouter(); 
@@ -47,6 +61,10 @@ const addCompletion = async () => {
         // Atualiza o estado e regenera o calendário
         completions.value.push(newCompletion);
         generateCalendar();
+        
+        // Logica de atribuição Xp por cada dia que o utlizador faz check-in
+        await authStore.addXP(20); // XP por check-in
+    
     }catch(error){
         console.error("Erro ao fazer check-in:", error);
     }
@@ -60,7 +78,7 @@ const loadHabitData = async () => {
     if (!authStore.user || !habitId) { 
         if (!authStore.user) router.push('/login');
         else {
-            // Se o ID estiver em falta na URL (embora deva ser sempre fornecido via props)
+            // Se o ID estiver em falta na URL
             console.error("ID do hábito em falta na rota.");
             router.push('/habits/daily'); // Redirecionar para a lista
         }
@@ -123,7 +141,7 @@ const generateCalendar = () => {
 
     // Um loop que itera desde a data de inicio até hoje
     while(currentDate <= today){
-        // 1. RE-INSERIDO: Define a string da data para uso interno (resolvendo o erro)
+        // 1. RE-INSERIDO: Define a string da data para uso interno 
         const dateString = currentDate.toISOString().split('T')[0];
 
         // Verifica se há um check-in para este dia
@@ -161,6 +179,40 @@ onMounted(() => {
         }
     });
 });
+
+const deleteHabit = async () => {
+    const confirmDelete = confirm("Tem a certeza que quer apagar este hábito? Esta ação não pode ser desfeita.");
+    if(!confirmDelete) return;
+
+    try {
+    //Apagar os check-ins ligados a este hábito
+    const completionsResponse = await fetch(
+      `${baseUrl}/completions?habitId=${habitId}`
+    );
+    const habitCompletions = await completionsResponse.json();
+
+    for (const completion of habitCompletions) {
+      await fetch(`${baseUrl}/completions/${completion.id}`, {
+        method: "DELETE"
+      });
+    }
+
+    // 2Apagar o hábito
+    await fetch(`${baseUrl}/habits/${habitId}`, {
+      method: "DELETE"
+    });
+
+    // Voltar para a lista de hábitos
+    router.push("/habits/daily");
+
+  } catch (error) {
+    console.error("Erro ao apagar hábito:", error);
+    alert("Erro ao apagar o hábito.");
+  }
+
+}
+
+
 </script>
 
 <template>
@@ -200,15 +252,19 @@ onMounted(() => {
                 <button 
                     @click="addCompletion" 
                     class="check-in-button"
-                    :disabled="loading"
+                    :disabled="loading || isHabitFinished"
                 >
                     ✔️ Check-in de Hoje
                 </button>
+                <p v-if="isHabitFinished" class="habit-ended-msg>">
+                    ⛔ Este hábito já terminou. Não é possivel mais fazer check-ins
+                </p>
             </section>
             </div>
         <div v-else class="error-state">
             <p>Não foi possível encontrar o hábito.</p>
         </div>
+        <button @click="deleteHabit" class="delete-button"> 🗑️ Apagar Hábito</button>
     </div>
 </template>
 
@@ -332,5 +388,25 @@ onMounted(() => {
 .check-in-button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+}
+.delete-button {
+  margin-top: 20px;
+  background: #ff3b3b;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background: #d63030;
+}
+
+.habit-ended-msg {
+  margin-top: 10px;
+  color: #ff6b6b;
+  font-weight: bold;
 }
 </style>

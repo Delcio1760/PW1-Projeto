@@ -27,6 +27,27 @@ export const useAuthStore = defineStore("auth", {  // Aqui definimos a store cha
 
         logout(){
             this.user = null;
+        },
+
+       async addXP(amount){
+            if(!this.user) return;
+
+            this.user.xp += amount
+            const xpNeeded = this.user.level * 100;
+            if(this.user.xp >= xpNeeded){
+                this.user.level += 1;
+                this.user.xp -= xpNeeded 
+            }
+
+            // Guarda no backend
+            // Guarda no "backend"
+        fetch(`http://localhost:3000/users/${this.user.id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(this.user)
+          });
         }
+        
+
     }
 })

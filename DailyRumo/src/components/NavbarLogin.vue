@@ -1,9 +1,8 @@
 <template>
     <nav class="navBar">
       <router-link to="/">Home</router-link>
-      <router-link to="/sobre">Sobre</router-link>
+      <router-link to="/dashboard">Dashboard</router-link>
       <router-link to="/contacto">Contacto</router-link>
-      <router-link to="/login" @click="logout">Logout</router-link>
       <router-link to="/perfil">Perfil</router-link>
     </nav>
   </template>

@@ -6,7 +6,7 @@
       "email": "delcio@exemplo.com",
       "password": "1234",
       "level": 2,
-      "xp": 120
+      "xp": 180
     },
     {
       "id": "2",
@@ -51,22 +51,6 @@
   ],
   "habits": [
     {
-      "id": "1",
-      "userId": "1",
-      "name": "Ler Livro: 48 Laws of Power",
-      "start": "2025-12-01",
-      "end": "2026-03-01",
-      "category": "personal"
-    },
-    {
-      "id": "2",
-      "userId": "1",
-      "name": "Beber 3L de água",
-      "start": "2025-12-01",
-      "end": "2025-12-31",
-      "category": "daily"
-    },
-    {
       "id": "3",
       "userId": "1",
       "name": "Planeamento Semanal",
@@ -99,26 +83,10 @@
       "category": "daily"
     },
     {
-      "id": "3d5a",
-      "name": "Aprender Alemão",
-      "start": "2025-12-01",
-      "end": "2026-12-01",
-      "category": "goals",
-      "userId": "1"
-    },
-    {
-      "id": "b6ce",
-      "name": "Correr 10Km",
-      "start": "2025-12-02",
-      "end": "2025-12-21",
-      "category": "daily",
-      "userId": "1"
-    },
-    {
-      "id": "b600",
-      "name": "Aprender Alemão",
-      "start": "2025-12-03",
-      "end": "2025-12-22",
+      "id": "0821",
+      "name": "Beber 3L de agua",
+      "start": "2026-01-08",
+      "end": "2026-01-10",
       "category": "daily",
       "userId": "1",
       "startTime": "00:00",
@@ -135,16 +103,22 @@
       "date": "2025-12-04"
     },
     {
-      "id": "824d",
+      "id": "f42a",
       "userId": "1",
-      "habitId": "2",
-      "date": "2025-12-04"
+      "habitId": "3",
+      "date": "2025-12-18"
     },
     {
-      "id": "d502",
+      "id": "e372",
       "userId": "1",
-      "habitId": "1",
-      "date": "2025-12-04"
+      "habitId": "0821",
+      "date": "2026-01-08"
+    },
+    {
+      "id": "566a",
+      "userId": "1",
+      "habitId": "3",
+      "date": "2026-01-08"
     }
   ]
 }

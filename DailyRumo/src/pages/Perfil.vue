@@ -57,6 +57,9 @@ const updatePassword = async () => {
         passwordMsg.value = `❌ ${error.message}`;
     }
 };
+
+const xpMax = user.level *100
+const xpPercent = Math.min((user.xp/xpMax)*100, 100);
 </script>
 
 <template>
@@ -104,9 +107,9 @@ const updatePassword = async () => {
             <div class="xp-progress">
               <label>Próximo Nível</label>
               <div class="progress-bar">
-                <div class="progress-fill" :style="{ width: `${(user.xp % 100)}%` }"></div>
+              <div class="progress-fill" :style="{ width: `${xpPercent}%` }"></div>
               </div>
-              <span class="xp-value">{{ user.xp % 100 }}/100 XP</span>
+              <span class="xp-value">{{ user.xp % 100 }}/{{ xpMax }} XP</span>
             </div>
 
           </div> </div> <div class="password-section">

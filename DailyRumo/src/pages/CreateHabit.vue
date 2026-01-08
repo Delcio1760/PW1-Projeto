@@ -36,6 +36,10 @@ onMounted(()=>{
 })
 
 const createHabit = async () => {
+  if (new Date(end.value) < new Date(start.value)) {
+  error.value = "⚠️ A data de fim não pode ser anterior à data de início.";
+  return;
+}
    if(!authStore.user){
       
        error.value = "⚠️ Precisa estar logado para criar hábitos.";
@@ -64,7 +68,6 @@ const createHabit = async () => {
         body: JSON.stringify(newHabit)
     });
     if(!response.ok){
-        // CORREÇÃO DE ENCODING
         throw new Error("Erro ao criar hábito. Tente novamente.");
     }
     
