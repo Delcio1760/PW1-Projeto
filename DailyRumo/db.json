@@ -5,8 +5,8 @@
       "nome": "Delcio",
       "email": "delcio@exemplo.com",
       "password": "1234",
-      "level": 2,
-      "xp": 180
+      "level": 3,
+      "xp": 0
     },
     {
       "id": "2",

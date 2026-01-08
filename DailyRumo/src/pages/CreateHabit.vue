@@ -88,76 +88,75 @@ const createHabit = async () => {
 
 <template>
   <div class="main-container"> 
-    
     <h1 class="page-header">✨ Criar Hábito</h1>
 
     <div class="form-card">
       <form @submit.prevent="createHabit">
         
+        <!-- Nome do hábito -->
         <div class="section-group">
           <label for="habit-name" class="label-title">Nome do Hábito</label>
-          <input type="text" id="habit-name" v-model="habitName" required placeholder="Ex: Beber 3L de água" class="input-field">
+          <input
+            type="text"
+            id="habit-name"
+            v-model="habitName"
+            required
+            placeholder="Ex: Beber 3L de água"
+            class="input-field"
+          >
         </div>
 
+        <!-- Datas -->
         <div class="section-group">
-          <label class="label-title">Meta (Goal)</label>
-          <div class="goal-input-group">
-            
-            <input type="number" v-model.number="goalValue" min="1" required class="input-field goal-value-input">
-            
-            <select v-model="goalUnit" class="input-field goal-unit-select">
-                <option value="vez/dia">vez/dia</option>
-                <option value="vezes/semana">vezes/semana</option>
-                <option value="minutos">minutos</option>
-                <option value="páginas">páginas</option>
-            </select>
-            
-          </div>
-        </div>
-        
-        <div class="section-group">
-          <label class="label-title">Período e Horário</label>
-          
+          <label class="label-title">Período</label>
+
           <div class="date-input-group">
             <div class="date-field">
-                <label for="start-date">📅 Data Início</label>
-                <input type="date" id="start-date" v-model="start" required class="input-field">
+              <label for="start-date">📅 Data Início</label>
+              <input
+                type="date"
+                id="start-date"
+                v-model="start"
+                required
+                class="input-field"
+              >
             </div>
+
             <div class="date-field">
-                <label for="end-date">🚩 Data Fim</label>
-                <input type="date" id="end-date" v-model="end" required class="input-field">
+              <label for="end-date">🚩 Data Fim</label>
+              <input
+                type="date"
+                id="end-date"
+                v-model="end"
+                required
+                class="input-field"
+              >
             </div>
           </div>
-
-          <div class="date-input-group mt-3">
-             <div class="date-field">
-                <label for="start-time">⌚ Hora Início</label>
-                <input type="time" id="start-time" v-model="startTime" class="input-field">
-            </div>
-            <div class="date-field">
-                <label for="end-time">⏱️ Hora Limite</label>
-                <input type="time" id="end-time" v-model="endTime" class="input-field">
-            </div>
-          </div>
-
         </div>
 
+        <!-- Categoria -->
         <div class="section-group">
           <label class="label-title">Categoria</label>
-          <p class="category-display">{{ props.category.toUpperCase() }}</p>
+          <p class="category-display">
+            {{ props.category.toUpperCase() }}
+          </p>
         </div>
 
+        <!-- Mensagens -->
         <p v-if="error" class="error-msg">{{ error }}</p>
         <p v-if="success" class="success-msg">{{ success }}</p>
 
+        <!-- Botão -->
         <button type="submit" class="submit-btn">
           <span class="icon">✔️</span> Salvar Hábito
         </button>
-        
+
       </form>
     </div>
   </div> 
 </template>
+
 
 <style scoped>
 /* 1. BACKGROUND GERAL E CONTAINER PRINCIPAL */
