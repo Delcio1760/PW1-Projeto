@@ -40,7 +40,6 @@ export const useAuthStore = defineStore("auth", {  // Aqui definimos a store cha
             }
 
             // Guarda no backend
-            // Guarda no "backend"
         fetch(`http://localhost:3000/users/${this.user.id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },

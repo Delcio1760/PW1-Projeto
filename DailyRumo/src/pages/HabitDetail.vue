@@ -3,6 +3,14 @@ import { ref, onMounted, defineProps } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/authStore';
 import { computed } from 'vue';
+import { getWeatherByCity } from '@/services/weatherService'
+
+
+
+const weather = ref(null)
+const weatherError = ref(null)
+const city = "Porto"
+
 
 const isHabitFinished = computed(() => {
   if (!habit.value?.end) return false;
@@ -172,12 +180,17 @@ const generateCalendar = () => {
     calendarDays.value = days; 
 };
 
-onMounted(() => {
+onMounted(async() => {
     loadHabitData().then(() => {
         if(habit.value){
             generateCalendar();
         }
     });
+    try{
+        weather.value = await getWeatherByCity(city)
+    }catch(err){
+        weatherError.value = err.message
+    }
 });
 
 const deleteHabit = async () => {
@@ -222,6 +235,17 @@ const deleteHabit = async () => {
         <div v-else-if="habit" class="habit-content">
             <h1 class="habit-title">{{ habit.name }}</h1>
             <p class="habit-meta">Categoria: {{ habit.category.toUpperCase() }} | Início: {{ habit.start }}</p>
+
+            <div v-if="weather && habit.category === 'outdoor'" class="weather-card">
+                <h3>Clima hoje em {{ weather.name }}</h3>
+                <p>{{ weather.weather[0].description }}</p>
+                <p>{{ weather.main.temp }}ºC</p>
+
+                <p v-if="weather.weather[0].main==='Rain'">
+                    Chuva prevista - Considere adptar esse habito.
+                </p>
+                <p v-else>Bom dia para manter este habito</p>
+            </div>
             
             <section class="calendar-section">
                 <h2>Progresso Diário</h2>
@@ -256,7 +280,7 @@ const deleteHabit = async () => {
                 >
                     ✔️ Check-in de Hoje
                 </button>
-                <p v-if="isHabitFinished" class="habit-ended-msg>">
+                <p v-if="isHabitFinished" class="habit-ended-msg">
                     ⛔ Este hábito já terminou. Não é possivel mais fazer check-ins
                 </p>
             </section>
@@ -408,5 +432,13 @@ const deleteHabit = async () => {
   margin-top: 10px;
   color: #ff6b6b;
   font-weight: bold;
+}
+.weather-card {
+  background: rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 16px;
+  margin: 16px 0;
+  color: white;
+  text-align: center;
 }
 </style>

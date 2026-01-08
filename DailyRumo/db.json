@@ -6,7 +6,7 @@
       "email": "delcio@exemplo.com",
       "password": "1234",
       "level": 3,
-      "xp": 0
+      "xp": 20
     },
     {
       "id": "2",
@@ -93,6 +93,18 @@
       "endTime": "23:59",
       "goalValue": 1,
       "goalUnit": "vez/dia"
+    },
+    {
+      "id": "e014",
+      "name": "Aprender Alemão",
+      "start": "2026-01-08",
+      "end": "2026-01-09",
+      "category": "daily",
+      "userId": "1",
+      "startTime": "00:00",
+      "endTime": "23:59",
+      "goalValue": 1,
+      "goalUnit": "vez/dia"
     }
   ],
   "completions": [
@@ -118,6 +130,12 @@
       "id": "566a",
       "userId": "1",
       "habitId": "3",
+      "date": "2026-01-08"
+    },
+    {
+      "id": "f75a",
+      "userId": "1",
+      "habitId": "e014",
       "date": "2026-01-08"
     }
   ]
