@@ -11,7 +11,6 @@ const props = defineProps({
   }
 })
 
-// const route = useRoute(); // REMOVIDO
 const router = useRouter();
 
 const authStore = useAuthStore();
