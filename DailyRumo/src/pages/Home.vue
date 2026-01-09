@@ -29,8 +29,10 @@ const openCategory = (category) => {
     <div class="main-container">
       
       <header class="main-header">
-        <img class="logo" alt="logotipo" src="../assets/logo.png" />
-        <h1>Bem-vindo ao <span>DailyRumo</span></h1>
+        <h1>
+          <img class="logo-inline" alt="logotipo" src="../assets/logo.png" />
+          Bem-vindo ao <span>DailyRumo</span>
+        </h1>
         <p class="tagline">Gira os teus hábitos de acordo com o teu ambiente.</p>
       </header>
 
@@ -87,16 +89,16 @@ const openCategory = (category) => {
     text-align: center;
   }
   
-  /* 2. HEADER: Tipografia limpa sobre a imagem */
   .main-header {
     margin-bottom: 60px;
   }
   
-  .logo {
-    width: 80px;
-    filter: drop-shadow(0 0 15px rgba(153, 126, 255, 0.6));
-    margin-bottom: 20px;
-  }
+  .logo-inline {
+  width: 70px; 
+  height: auto;
+  filter: drop-shadow(0 0 15px rgba(153, 126, 255, 0.6));
+  vertical-align: middle; 
+}
   
   h1 {
     font-size: 3rem;
