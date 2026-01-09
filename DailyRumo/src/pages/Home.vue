@@ -24,151 +24,164 @@ const openCategory = (category) => {
 };
 </script>
 
-
 <template>
-    <div class="container">
-    
-   
-     <img class="headerImg" alt="imagem do card" src="../assets/cardImg.png" />
-    
-     <h1>
-       Bem Vindo ao DailyRumo!
-       <img class="logo" alt="logotipo" src="../assets/logo.png" />
-     </h1>
-    
-     <div class="cardsContainer">
-    
-       <div class="card" @click="openCategory('daily')">
-         <img class="cardimg" alt="Icone de tarefas" src="../assets/card1Img.png" />
-         <h2>Daily</h2>
-         <ul>
-           <li>Planeador</li>
-           <li>Habitos</li>
-           <li>Diario</li>
-         </ul>
-       </div>
-    
-       <div class="card" @click="openCategory('planners')">
-         <img class="cardimg" alt="I­cone de metas" src="../assets/card2Img.png" />
-         <h2>Planners</h2>
-         <ul>
-           <li>Planeador de refeição</li>
-           <li>Planeador de Viagens</li>
-           <li>Planeador de Treino</li>
-         </ul>
-       </div>
-    
-       <div class="card" @click="openCategory('personal')">
-         <img class="cardimg" alt="I­cone de finanças" src="../assets/card3Img.png" />
-         <h2>Personal</h2>
-         <ul>
-           <li>Leitura</li>
-           <li>Filmes</li>
-           <li>Finanças</li>
-         </ul>
-       </div>
-    
-       <div class="card" @click="openCategory('goals')">
-         <img class="cardimg" alt="I­cone de produtividade" src="../assets/card4Img.png" />
-         <h2>Goals</h2>
-         <ul>
-           <li>Visão</li>
-           <li>Saúde</li>
-           <li>Objectivos</li>
-         </ul>
-       </div>
-    
-     </div>
-     
-     <Popup 
-  v-if="showPopup" 
-  :message="popupMessage" 
-  @close="router.push('/login')"/>
+  <div class="hero-wrapper">
+    <div class="main-container">
+      
+      <header class="main-header">
+        <img class="logo" alt="logotipo" src="../assets/logo.png" />
+        <h1>Bem-vindo ao <span>DailyRumo</span></h1>
+        <p class="tagline">Gira os teus hábitos de acordo com o teu ambiente.</p>
+      </header>
 
-    </div> 
-     </template>
+      <div class="cards-wrapper">
+        <div class="glass-card" @click="openCategory('indoor')">
+          <div class="icon-wrapper">🏠</div>
+          <div class="card-content">
+            <h2>Indoor</h2>
+            <p>Foco total no teu espaço interior. Ideal para leitura e meditação.</p>
+            <div class="btn-minimal">Aceder à lista <span class="arrow">→</span></div>
+          </div>
+        </div>
+
+        <div class="glass-card" @click="openCategory('outdoor')">
+          <div class="icon-wrapper">🌳</div>
+          <div class="card-content">
+            <h2>Outdoor</h2>
+            <p>Atividades ao ar livre com integração meteorológica inteligente.</p>
+            <div class="btn-minimal">Aceder à lista <span class="arrow">→</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    
+    <Popup 
+      v-if="showPopup" 
+      :message="popupMessage" 
+      @close="router.push('/login')"
+    />
+  </div> 
+</template>
 
 <style scoped>
-
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background-color: black;
-  text-align: center;
-}
-
-.logo {
-  width: 100px;
-  height: auto;
-}
-
-h1 {
-  font-family: 'Arial', bold;
-  font-size: 40px;
-  color: white;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.headerImg {
-  width: 90%;
-  height: auto;
-  border-radius: 16px;
-  object-fit: cover;
-  display: block;
-  margin: 40px auto 20px auto;
-}
-
-.cardsContainer {
-  width: 90%;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  margin-top: 40px;
-}
-
-.card {
-  background-color:#111;
-  border-radius: 16px;
-  padding: 12px;
-  text-align: left;
-  color: white;
-  font-family: 'Arial', bold;
-  transition: 0.3s ease;
-  cursor: pointer;
-}
-
-.card:hover {
-  background-color: purple;
-  transform: translateY(-4px);
-}
-
-.cardimg {
-  width: 100%;
-  height: 120px;
-  border-radius: 12px;
-  object-fit: cover;
-}
-
-.card h2 {
-  font-size: 20px;
-  margin-top: 10px;
-}
-
-.card ul {
-  list-style: none;
-  padding: 0;
-  margin-top: 8px;
-  font-size: 14px;
-  opacity: 0.8;
-}
-
-.card li {
-  margin-bottom: 4px;
-}
-</style>
+  .hero-wrapper {
+    min-height: 100vh;
+    background: 
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.4), #000000), 
+      url('../assets/homeImg.jpeg');
+    background-size: cover;
+    background-position: center top;
+    background-attachment: fixed; 
+    display: flex;
+    justify-content: center;
+  }
+  
+  .main-container {
+    width: 100%;
+    max-width: 1100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 80px 20px;
+    text-align: center;
+  }
+  
+  /* 2. HEADER: Tipografia limpa sobre a imagem */
+  .main-header {
+    margin-bottom: 60px;
+  }
+  
+  .logo {
+    width: 80px;
+    filter: drop-shadow(0 0 15px rgba(153, 126, 255, 0.6));
+    margin-bottom: 20px;
+  }
+  
+  h1 {
+    font-size: 3rem;
+    color: white;
+    font-weight: 800;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  h1 span {
+    color: #c37eff;
+  }
+  
+  .tagline {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.2rem;
+    margin-top: 10px;
+  }
+  
+  /* 3. CARDS: Efeito Glassmorphism (Vidro) */
+  .cards-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    width: 100%;
+  }
+  
+  .glass-card {
+    flex: 1;
+    min-width: 320px;
+    max-width: 420px;
+    background: rgba(255, 255, 255, 0.05); 
+    backdrop-filter: blur(15px); 
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 32px;
+    padding: 50px 30px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+  
+  .glass-card:hover {
+    background: rgba(153, 85, 255, 0.1);
+    border-color: rgba(153, 85, 255, 0.5);
+    transform: translateY(-12px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+  }
+  
+  .icon-wrapper {
+    font-size: 60px;
+    margin-bottom: 25px;
+    background: rgba(255, 255, 255, 0.1);
+    width: 110px;
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
+  
+  .card-content h2 {
+    font-size: 2rem;
+    color: white;
+    margin-bottom: 15px;
+  }
+  
+  .card-content p {
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    margin-bottom: 30px;
+  }
+  
+  .btn-minimal {
+    color: #c37eff;
+    font-weight: 700;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    .cards-wrapper { flex-direction: column; align-items: center; }
+    h1 { font-size: 2.2rem; }
+  }
+  </style>
     

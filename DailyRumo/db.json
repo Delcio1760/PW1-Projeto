@@ -79,6 +79,16 @@
       "userId": "1",
       "startTime": "00:00",
       "endTime": "23:59"
+    },
+    {
+      "id": "1c96",
+      "name": "Caminhar por 30min",
+      "start": "2026-01-09",
+      "end": "2026-01-10",
+      "category": "outdoor",
+      "userId": "1",
+      "startTime": "00:00",
+      "endTime": "23:59"
     }
   ],
   "completions": [
