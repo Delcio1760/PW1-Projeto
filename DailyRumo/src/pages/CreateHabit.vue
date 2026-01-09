@@ -19,12 +19,11 @@ const authStore = useAuthStore();
 const habitName = ref('');
 const start = ref('');
 const end = ref('');
+const environment = ref('indoor')
 
 const startTime = ref('');
 const endTime = ref('');
 
-const goalValue = ref(1);
-const goalUnit = ref('vez/dia');
 
 const error = ref("");
 const success = ref("");
@@ -50,13 +49,10 @@ const createHabit = async () => {
     name: habitName.value,
     start: start.value,
     end: end.value,
-    category: props.category,
+    category: environment.value,
     userId: authStore.user.id,
     startTime: startTime.value || '00:00',
     endTime: endTime.value || '23:59',
-
-    goalValue: goalValue.value,
-    goalUnit: goalUnit.value
    };
 
    try{
@@ -70,14 +66,14 @@ const createHabit = async () => {
     if(!response.ok){
         throw new Error("Erro ao criar hábito. Tente novamente.");
     }
+    const createdHabit = await response.json();
     
     success.value = "✅ Hábito criado com sucesso!";
     habitName.value = "";
     startTime.value = "";
     endTime.value = "";
-    goalValue.value = 1;
     error.value = "";
-    router.push(`/habits/${props.category}`);
+    router.push(`/habits/${createdHabit.id}`);
    
   }catch(error){
     success.value = "";
@@ -137,10 +133,15 @@ const createHabit = async () => {
 
         <!-- Categoria -->
         <div class="section-group">
-          <label class="label-title">Categoria</label>
-          <p class="category-display">
-            {{ props.category.toUpperCase() }}
-          </p>
+          <label class="label-title">Onde vais realizar o hábito?</label>
+          <div class="environment-selector">
+            <label class="radio-label">
+              <input type="radio" v-model="environment" value="indoor"> 🏠 Indoor
+            </label>
+            <label class="radio-label">
+              <input type="radio" v-model="environment" value="outdoor"> 🌳 Outdoor
+            </label>
+          </div>
         </div>
 
         <!-- Mensagens -->
@@ -299,5 +300,46 @@ const createHabit = async () => {
     background-color: #004f00; 
     color: #88ff88; 
     border: 1px solid #00ff00;
+}
+/* Estilo para o Seletor de Categorias */
+.category-selector {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.category-option {
+    flex: 1;
+    cursor: pointer;
+    position: relative;
+}
+
+.hidden-radio {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.option-content {
+    display: block;
+    padding: 12px;
+    text-align: center;
+    background-color: #333;
+    border: 1px solid #444;
+    border-radius: 8px;
+    color: #ccc;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+.category-option:hover .option-content {
+    border-color: #9955ff;
+    background-color: #3d3d3d;
+}
+.category-option.active .option-content {
+    background: linear-gradient(90deg, #9955ff, #c37eff); 
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 4px 10px rgba(153, 85, 255, 0.3);
 }
 </style>

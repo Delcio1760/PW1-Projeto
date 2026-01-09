@@ -6,7 +6,7 @@
       "email": "delcio@exemplo.com",
       "password": "1234",
       "level": 3,
-      "xp": 20
+      "xp": 60
     },
     {
       "id": "2",
@@ -51,92 +51,42 @@
   ],
   "habits": [
     {
-      "id": "3",
-      "userId": "1",
-      "name": "Planeamento Semanal",
-      "start": "2025-12-01",
-      "end": "2026-06-01",
-      "category": "planners"
-    },
-    {
-      "id": "4",
-      "userId": "3",
-      "name": "Correr 5km, 3x por semana",
-      "start": "2025-12-15",
-      "end": "2026-05-01",
-      "category": "goals"
-    },
-    {
-      "id": "5",
-      "userId": "3",
-      "name": "Poupar 200€ por mês",
-      "start": "2025-12-01",
-      "end": "2026-12-31",
-      "category": "personal"
-    },
-    {
-      "id": "6",
-      "userId": "4",
-      "name": "Diário: Escrever 500 palavras",
-      "start": "2025-11-20",
-      "end": "2026-01-31",
-      "category": "daily"
-    },
-    {
-      "id": "0821",
-      "name": "Beber 3L de agua",
-      "start": "2026-01-08",
+      "id": "f4e0",
+      "name": "Correr 10Km",
+      "start": "2026-01-09",
       "end": "2026-01-10",
-      "category": "daily",
+      "category": "outdoor",
       "userId": "1",
       "startTime": "00:00",
-      "endTime": "23:59",
-      "goalValue": 1,
-      "goalUnit": "vez/dia"
+      "endTime": "23:59"
     },
     {
-      "id": "e014",
+      "id": "065f",
       "name": "Aprender Alemão",
-      "start": "2026-01-08",
-      "end": "2026-01-09",
-      "category": "daily",
+      "start": "2026-01-09",
+      "end": "2026-01-10",
+      "category": "indoor",
       "userId": "1",
       "startTime": "00:00",
-      "endTime": "23:59",
-      "goalValue": 1,
-      "goalUnit": "vez/dia"
+      "endTime": "23:59"
+    },
+    {
+      "id": "0673",
+      "name": "Correr 10Km",
+      "start": "2026-01-09",
+      "end": "2026-01-10",
+      "category": "outdoor",
+      "userId": "1",
+      "startTime": "00:00",
+      "endTime": "23:59"
     }
   ],
   "completions": [
     {
-      "id": "e9b8",
+      "id": "5edc",
       "userId": "1",
-      "habitId": "3",
-      "date": "2025-12-04"
-    },
-    {
-      "id": "f42a",
-      "userId": "1",
-      "habitId": "3",
-      "date": "2025-12-18"
-    },
-    {
-      "id": "e372",
-      "userId": "1",
-      "habitId": "0821",
-      "date": "2026-01-08"
-    },
-    {
-      "id": "566a",
-      "userId": "1",
-      "habitId": "3",
-      "date": "2026-01-08"
-    },
-    {
-      "id": "f75a",
-      "userId": "1",
-      "habitId": "e014",
-      "date": "2026-01-08"
+      "habitId": "065f",
+      "date": "2026-01-09"
     }
   ]
 }

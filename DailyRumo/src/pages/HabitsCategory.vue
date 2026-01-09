@@ -9,7 +9,7 @@ const router = useRouter();
 const auth = useAuthStore();
 const baseUrl = 'http://localhost:3000'; 
 
-const category = route.params.category; // Deve ler 'daily', 'planners', etc.
+const category = computed (() => route.params.category)
 
 const habits = ref([]);
 const completions = ref([]); // Estado para guardar todos os check-ins
@@ -36,7 +36,7 @@ const loadHabitsAndCompletions = async () => {
 
     try {
         // 1. Obter todos os hábitos do utilizador e da categoria
-        const habitsResponse = await fetch(`${baseUrl}/habits?userId=${userId}&category=${category}`);
+        const habitsResponse = await fetch(`${baseUrl}/habits?userId=${userId}&category=${category.value}`);
         habits.value = await habitsResponse.json();
 
         // 2. Obter todos os check-ins do utilizador
