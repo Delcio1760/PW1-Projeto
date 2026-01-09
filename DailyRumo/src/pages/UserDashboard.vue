@@ -13,6 +13,8 @@
       </div>
 
       <p>✅ Check-ins esta semana: {{ weeklyCompletions }}</p>
+      <p>Streak atual: {{ currentStreak }} dias</p>
+      <p>Melhor Streak: {{ bestStreak }} dias</p>
     </div>
   </div>
 </template>
@@ -31,6 +33,10 @@ const xpPercent = computed(() => Math.min((user.xp / xpMax.value) * 100, 100));
 const weeklyCompletions = ref(0);
 const baseUrl = 'http://localhost:3000';
 
+const currentStreak = ref(0);
+const bestStreak = ref(0);
+
+
 const loadWeeklyStats = async () => {
   const today = new Date()
   const weekAgo = new Date()
@@ -43,8 +49,47 @@ const loadWeeklyStats = async () => {
     const date = new Date(c.date);
     return date >= weekAgo && date <= today;
   }).length;
+
+  calculateStreaks(allCompletions)
 };
 
+//--- Função para calcular Streaks ----//
+const calculateStreaks = (completions) =>{
+  const uniqueDates = [...new Set(completions.map(c=>new Date(c.date).toISOString().split('T')[0]))] // Extrair datas unicas
+  uniqueDates.sort()
+  let best = 0
+
+  // Calcular a Streak maxima
+  let streak = 1
+  for(let i=1 ;i < uniqueDates.length; i++){
+    const previos = new Date(uniqueDates[i-1])
+    const currentDate = new Date(uniqueDates[i])
+
+    const difference = (currentDate - previos) / (1000*60*60*24)
+
+    if(difference === 1){
+      streak++
+    }else{
+      best = Math.max(best, streak)
+      streak = 1
+    }
+  }
+  best = Math.max(best, streak)
+
+  // Calcular a streak atual, comecando hoje
+  const today = new Date()
+  today.setHours(0,0,0,0)
+
+  let temporaryStreak = 0
+  let dayPointer = today
+
+  while(uniqueDates.includes(dayPointer.toISOString().split('T')[0])){
+    temporaryStreak++
+    dayPointer.setDate(dayPointer.getDate()-1)
+    currentStreak.value = temporaryStreak
+    bestStreak.value = best
+  }
+}
 onMounted(() => {
   loadWeeklyStats();
 });
