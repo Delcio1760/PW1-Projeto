@@ -16,12 +16,18 @@
       <p>Streak atual: {{ currentStreak }} dias</p>
       <p>Melhor Streak: {{ bestStreak }} dias</p>
     </div>
+    <div class="chart-card" v-show="chartReady">
+      <h3>Check-ins Indoor vs Outdoor (últimos 7 dias)</h3>
+      <canvas ref="chartCanvas"></canvas>
+    </div>
   </div>
 </template>
 
 <script setup>
+import {Chart, registerables} from 'chart.js'
 import { ref, computed, onMounted } from 'vue';
 import { useAuthStore } from '../stores/authStore';
+Chart.register(...registerables)
 
 const authStore = useAuthStore();
 const user = authStore.user;
@@ -35,7 +41,7 @@ const baseUrl = 'http://localhost:3000';
 
 const currentStreak = ref(0);
 const bestStreak = ref(0);
-
+const chartReady = ref(false)
 
 const loadWeeklyStats = async () => {
   const today = new Date()
@@ -51,6 +57,7 @@ const loadWeeklyStats = async () => {
   }).length;
 
   calculateStreaks(allCompletions)
+  chartReady.value = true
 };
 
 //--- Função para calcular Streaks ----//
@@ -90,10 +97,88 @@ const calculateStreaks = (completions) =>{
     bestStreak.value = best
   }
 }
+
+ const chartCanvas = ref(null)
+ let chartInstance = null
+ 
+ //-- Funcao para buscar as completions e os habitos
+ const loadChartData = async ()=>{
+  const today = new Date()
+  today.setHours(0,0,0,0)
+
+  const lastSevenDays = []
+  for(let i=6; i>=0; i--){
+    const day = new Date(today)
+    day.setDate(today.getDate() -i)
+    lastSevenDays.push(day.toISOString().split('T')[0])
+  }
+  //Buscar os habitos
+  const habitsResponse = await fetch(`${baseUrl}/habits?userId=${user.id}`)
+  const habits = await habitsResponse.json()
+  // Buscar os check-ins
+  const completionsResponse = await fetch(`${baseUrl}/completions?userId=${user.id}`)
+  const completions = await completionsResponse.json()
+  //Preparar contadores
+  const indoorCounts = [0,0,0,0,0,0,0]
+  const outdoorCounts = [0,0,0,0,0,0,0]
+
+  // Contar tudo
+  for(const completion of completions){
+    const dayIndex = lastSevenDays.indexOf(completion.date)
+    if(dayIndex === -1)continue
+
+    const habit = habits.find(h=>h.id===completion.habitId)
+    if(!habit)continue
+
+    if(habit.environment === 'indoor'){
+      indoorCounts[dayIndex]++
+    }
+
+    if(habit.environment === 'outdoor'){
+      outdoorCounts[dayIndex]++
+    }
+  }
+  createChart(
+    lastSevenDays.map(d=>d.slice(5)),
+    indoorCounts,
+    outdoorCounts
+  )
+}
+
+ //--- Funcao para criar grafico ----//
+ const createChart = (labels, indoorData, outdoorData) => {
+  if(chartInstance)chartInstance.destroy();
+
+  chartInstance = new Chart(chartCanvas.value,{
+    type:'bar',
+    data: {
+      labels,
+      datasets:[{
+        label: 'indoor',
+        data: indoorData
+      },
+    {
+      label:'outdoor',
+      data: outdoorData
+    }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top'
+        }
+      }
+    }
+  })
+
+
+ }
+
 onMounted(() => {
   loadWeeklyStats();
+  loadChartData()
 });
-
 </script>
 
 <style scoped>
@@ -124,5 +209,11 @@ onMounted(() => {
     height: 100%;
     background: linear-gradient(90deg, #00ff88, #00ccff);
     transition: width 0.3s ease;
+  }
+  .chart-card {
+  margin-top: 30px;
+  padding: 20px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 12px;
   }
   </style>
