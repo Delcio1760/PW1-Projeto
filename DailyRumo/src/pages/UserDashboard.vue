@@ -115,34 +115,25 @@ const calculateStreaks = (completions) =>{
   //Buscar os habitos
   const habitsResponse = await fetch(`${baseUrl}/habits?userId=${user.id}`)
   const habits = await habitsResponse.json()
+
+  const habitCategoryMap = {}
+  habits.forEach(habit => {
+  habitCategoryMap[habit.id] = habit.category
+  })
+  
   // Buscar os check-ins
   const completionsResponse = await fetch(`${baseUrl}/completions?userId=${user.id}`)
   const completions = await completionsResponse.json()
-  //Preparar contadores
-  const indoorCounts = [0,0,0,0,0,0,0]
-  const outdoorCounts = [0,0,0,0,0,0,0]
+  //Contar indoor vs outdoor
+  let indoorCount = 0
+  let outdoorCount = 0
 
-  // Contar tudo
-  for(const completion of completions){
-    const dayIndex = lastSevenDays.indexOf(completion.date)
-    if(dayIndex === -1)continue
-
-    const habit = habits.find(h=>h.id===completion.habitId)
-    if(!habit)continue
-
-    if(habit.environment === 'indoor'){
-      indoorCounts[dayIndex]++
-    }
-
-    if(habit.environment === 'outdoor'){
-      outdoorCounts[dayIndex]++
-    }
-  }
-  createChart(
-    lastSevenDays.map(d=>d.slice(5)),
-    indoorCounts,
-    outdoorCounts
-  )
+  completions.forEach(c => {
+    const category = habitCategoryMap[c.habitId]
+    if (category === 'indoor') indoorCount++
+    if (category === 'outdoor') outdoorCount++
+  })
+  createChart(['Categorias'], [indoorCount], [outdoorCount])
 }
 
  //--- Funcao para criar grafico ----//
