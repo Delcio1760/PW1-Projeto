@@ -3,50 +3,58 @@
     {
       "id": "1",
       "nome": "Delcio",
-      "email": "delcio@exemplo.com",
-      "password": "1234",
+      "email": "delcio@gmail.com",
+      "password": "Delcio123",
       "level": 3,
       "xp": 120
     },
     {
       "id": "2",
       "nome": "Marcio",
-      "email": "marcio@exemplo.com",
-      "password": "1234",
+      "email": "marcio@yahoo.com",
+      "password": "Marcio456",
       "level": 0,
       "xp": 0
     },
     {
       "id": "3",
       "nome": "Ana",
-      "email": "ana@exemplo.com",
-      "password": "1234",
+      "email": "ana@icloud.com",
+      "password": "AnaPass99",
       "level": 1,
       "xp": 50
     },
     {
       "id": "4",
       "nome": "Rui",
-      "email": "rui@exemplo.com",
-      "password": "1234",
+      "email": "rui@outlook.com",
+      "password": "Rui2024xx",
       "level": 3,
       "xp": 250
     },
     {
       "id": "5",
       "nome": "Sofia",
-      "email": "sofia@exemplo.com",
-      "password": "1234",
+      "email": "sofia@gmail.com",
+      "password": "Sofia321",
       "level": 0,
       "xp": 10
     },
     {
       "id": "6",
       "nome": "Pedro",
-      "email": "pedro@exemplo.com",
-      "password": "1234",
+      "email": "pedro@yahoo.com",
+      "password": "Pedro777",
       "level": 2,
       "xp": 180
+    },
+    {
+      "id": "4611",
+      "nome": "Scar",
+      "email": "Scar@gmail.com",
+      "password": "Scar12345",
+      "xp": 0,
+      "level": 1
     }
   ],
   "habits": [
@@ -56,16 +64,6 @@
       "start": "2026-01-09",
       "end": "2026-01-10",
       "category": "outdoor",
-      "userId": "1",
-      "startTime": "00:00",
-      "endTime": "23:59"
-    },
-    {
-      "id": "065f",
-      "name": "Aprender Alemão",
-      "start": "2026-01-09",
-      "end": "2026-01-10",
-      "category": "indoor",
       "userId": "1",
       "startTime": "00:00",
       "endTime": "23:59"
@@ -92,12 +90,6 @@
     }
   ],
   "completions": [
-    {
-      "id": "5edc",
-      "userId": "1",
-      "habitId": "065f",
-      "date": "2026-01-09"
-    },
     {
       "id": "fbab",
       "userId": "1",

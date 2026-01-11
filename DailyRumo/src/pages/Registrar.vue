@@ -10,7 +10,30 @@ const password = ref("");
 const auth = useAuthStore();
 const router = useRouter();
 
+//--- Funcoes para validar email e password ---//
+const error = ref("");
+const validEmail = (email) => {
+  const regex = /^[^\s@]+@(gmail\.com|yahoo\.com|icloud\.com|outlook\.com)$/;
+  return regex.test(email);
+};
+const validPassword = (password) => {
+  const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+  return regex.test(password);
+};
 const doRegister = async () => {
+  error.value = "";
+
+  if (!validEmail(email.value)) {
+    error.value = "Esse email é inválido. Usa gmail, yahoo, icloud ou outlook.";
+    return;
+  }
+
+  if (!validPassword(password.value)) {
+    error.value =
+      "A password deve ter pelo menos 8 caracteres, com letras e números.";
+    return;
+  }
+
   await auth.registrar(name.value, email.value, password.value);
   router.push("/");
 };
@@ -22,6 +45,7 @@ const doRegister = async () => {
     <div class="auth-container">
   <div class="register-container">
     <h1>Criar Conta</h1>
+    <p v-if="error" class="error-message">{{ error }}</p>
 
     <form @submit.prevent="doRegister">
       <input v-model="name" placeholder="Nome" required />
@@ -111,4 +135,9 @@ const doRegister = async () => {
   transform: translateY(-2px);
 }
 
+.error-message {
+  color: #ff6b6b;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
 </style>
