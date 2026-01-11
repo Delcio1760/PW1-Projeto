@@ -55,6 +55,37 @@ const openCategory = (category) => {
           </div>
         </div>
       </div>
+      <section v-if="!authStore.user" class="cta-guest">
+        <h2>Começa a construir melhores hábitos hoje</h2>
+        <p>
+          Cria hábitos Indoors e Outdoors, acompanha o teu progresso
+          e evolui com streaks, niveis e XP
+        </p>
+        <div class="cta-actions">
+          <button class="cta-primary" @click="router.push('/register')">
+            Criar conta gratis
+          </button>
+          <button class="cta-secondary" @click="router.push('/login')">
+            Já tenho conta
+          </button>
+        </div>
+      </section>
+      <section v-if="!authStore.user" class="dashboard-preview">
+        <h2>O teu progresso num relance</h2>
+
+        <div class="preview-card">
+          <p>⭐ Nível 2</p>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 60%"></div>
+          </div>
+          <p>🔥 Streak atual: 5 dias</p>
+          <p>🏠 Indoor: 3 hábitos</p>
+          <p>🌳 Outdoor: 2 hábitos</p>
+        </div>
+        <p class="preview-hint">
+          Cria uma conta para começares a acompanhar o teu progresso real.
+        </p>
+      </section>  
 
     </div>
     
@@ -180,7 +211,70 @@ const openCategory = (category) => {
     justify-content: center;
     gap: 10px;
   }
-  
+
+  .cta-guest {
+  margin-top: 80px;
+  padding: 40px;
+  text-align: center;
+  border-radius: 20px;
+  backdrop-filter: blur(14px);
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+}
+
+.cta-guest h2 {
+  font-size: 2rem;
+  margin-bottom: 12px;
+}
+
+.cta-guest p {
+  opacity: 0.9;
+  margin-bottom: 30px;
+}
+
+.cta-actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.cta-primary {
+  background: linear-gradient(90deg, #00ffcc, #00ccff);
+  border: none;
+  padding: 14px 28px;
+  border-radius: 30px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.cta-secondary {
+  background: transparent;
+  border: 1px solid white;
+  padding: 14px 28px;
+  border-radius: 30px;
+  color: white;
+  cursor: pointer;
+}
+.dashboard-preview {
+  margin-top: 80px;
+  text-align: center;
+  color: white;
+}
+
+.preview-card {
+  max-width: 400px;
+  margin: 30px auto;
+  padding: 25px;
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.preview-hint {
+  opacity: 0.8;
+  font-size: 0.9rem;
+}
+
   @media (max-width: 768px) {
     .cards-wrapper { flex-direction: column; align-items: center; }
     h1 { font-size: 2.2rem; }
