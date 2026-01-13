@@ -4,6 +4,7 @@
       <div class="nav-links">
         <router-link to="/" class="nav-item">Home</router-link>
         <router-link to="/contacto" class="nav-item">Contacto</router-link>
+        <router-link to="/sobre"class="nav-item">Sobre Nós</router-link>
         </div>
       
       <div class="nav-auth">

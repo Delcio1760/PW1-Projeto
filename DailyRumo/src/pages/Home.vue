@@ -1,8 +1,9 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useAuthStore } from "../stores/authStore";
 import { useRouter } from "vue-router";
 import Popup from "../components/PopUp.vue";
+import { Chart, plugins } from 'chart.js/auto';
 
 const authStore = useAuthStore();
 const router = useRouter();
@@ -22,6 +23,56 @@ const openCategory = (category) => {
     params: {category : category }
   })
 };
+
+const weeklyChart = ref(null);
+
+const loadWeeklyChart = async () => {
+  const response = await fetch("http://localhost:3000/completions");
+  const completions = await response.json();
+
+  // só do user logado
+  const userCompletions = completions.filter(c =>c.userId === authStore.user.id);
+  // ultimos 7 dias
+  const days = [];
+  const counts = [];
+
+  for(let i=6; i>=0; i--){
+    const date = new Date();
+    date.setDate(date.getDate()-i);
+
+    const day = date.toISOString().split('T')[0];
+    days.push(date.toLocaleDateString("pt-PT",{weekday:"short"}));
+
+    counts.push(userCompletions.filter(c => c.date === day).length);
+  }
+  new Chart(weeklyChart.value,{
+    type: "line",
+    data: {
+      labels: days,
+      datasets: [
+        {
+          label: "Check-ins",
+          data: counts,
+          borderWidth: 3,
+          tension: 0.4,
+          fill: true,
+        }
+      ]
+    },
+    options:{
+      responsive: true,
+      plugins: {
+        legend: {display: false}
+      }
+    }
+  });
+};
+ onMounted(() =>{
+  if(authStore.user){
+    loadWeeklyChart();
+  }
+ });
+
 </script>
 
 <template>
@@ -55,6 +106,12 @@ const openCategory = (category) => {
           </div>
         </div>
       </div>
+
+      <div v-if="authStore.user" class="home-chart-card">
+        <h3>📈 Check-ins da Semana</h3>
+        <canvas ref="weeklyChart"></canvas>
+      </div>
+
       <section v-if="!authStore.user" class="cta-guest">
         <h2>Começa a construir melhores hábitos hoje</h2>
         <p>
@@ -279,5 +336,19 @@ const openCategory = (category) => {
     .cards-wrapper { flex-direction: column; align-items: center; }
     h1 { font-size: 2.2rem; }
   }
+  .home-chart-card {
+  margin-top: 40px;
+  padding: 32px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.home-chart-card h3 {
+  font-family: "Poppins", sans-serif;
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+}
   </style>
     

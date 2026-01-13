@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap');
+
+:root {
+  --font-title: 'Poppins', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  --text-primary: #ffffff;
+  --text-secondary: #cfcfcf;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 {
+  font-family: var(--font-title);
+  font-size: 2.6rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+h2 {
+  font-family: var(--font-title);
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+h3 {
+  font-family: var(--font-title);
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+.tagline {
+    font-size: 1.1rem;
+    font-weight: 400;
+    opacity: 0.85;
+  }
+  .glass-card h2 {
+    font-family: var(--font-title);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  .page-container {
+    max-width: 900px;
+    margin: 6rem auto;
+    padding: 0 2rem;
+  }
+  body {
+    background: radial-gradient(circle at top, #1b1b2f, #0f0f18);
+  }
+  
+  
+    

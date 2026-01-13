@@ -229,216 +229,266 @@ const deleteHabit = async () => {
 </script>
 
 <template>
-    <div class="detail-container">
-        <div v-if="loading" class="loading-state">A carregar detalhes do hábito...</div>
+    <div class ="detail-wrapper">
+        <div v-if="loading" class="loading-state">
+            <div class="spinner"></div>
+            <p>A carregar detalhes...</p>
+        </div>
 
-        <div v-else-if="habit" class="habit-content">
-            <h1 class="habit-title">{{ habit.name }}</h1>
-            <p class="habit-meta">Categoria: {{ habit.category.toUpperCase() }} | Início: {{ habit.start }}</p>
-
-            <div v-if="weather && habit.category === 'outdoor'" class="weather-card">
-                <h3>Clima hoje em {{ weather.name }}</h3>
-                <p>{{ weather.weather[0].description }}</p>
-                <p>{{ weather.main.temp }}ºC</p>
-
-                <p v-if="weather.weather[0].main==='Rain'">
-                    Chuva prevista - Considere adptar esse habito.
-                </p>
-                <p v-else>Bom dia para manter este habito</p>
-            </div>
-            
-            <section class="calendar-section">
-                <h2>Progresso Diário</h2>
-
-                <div class="calendar-grid">
-                    <div class="day-box weekday-label">Seg</div>
-                    <div class="day-box weekday-label">Ter</div>
-                    <div class="day-box weekday-label">Qua</div>
-                    <div class="day-box weekday-label">Qui</div>
-                    <div class="day-box weekday-label">Sex</div>
-                    <div class="day-box weekday-label">Sáb</div>
-                    <div class="day-box weekday-label">Dom</div>
-
-                    <div v-for="day in calendarDays" 
-                        :key="day.date || day.index" 
-                        class="day-box"
-                        :class="{ 
-                            'completed': day.completed,
-                            'is-today': day.isToday,
-                            'missed': day.isMissed,       
-                            'empty-day': day.isEmpty 
-                        }"
-                        :title="day.date">
-                        <span v-if="!day.isEmpty">{{ day.dayOfMonth }}</span>
+        <div v-else-if="habit" class="habit-container">
+            <header class="habit-header">
+                <div class="title-section">
+                    <h1 class="habit-title">{{ habit.name }}</h1>
+                    <div class="habit-badges">
+                        <span class="badge category">{{ habit.category }}</span>
+                        <span class="badge date">Início: {{ habit.start }}</span>
                     </div>
                 </div>
-                
-                <button 
-                    @click="addCompletion" 
-                    class="check-in-button"
-                    :disabled="loading || isHabitFinished"
-                >
-                    ✔️ Check-in de Hoje
-                </button>
-                <p v-if="isHabitFinished" class="habit-ended-msg">
-                    ⛔ Este hábito já terminou. Não é possivel mais fazer check-ins
-                </p>
-            </section>
+                <button @click="deleteHabit" class="btn-icon-delete" title="Apagar Hábito ">🗑️</button>
+            </header>
+            <div v-if="weather && habit.category === 'outdoor'" class="weather-glass-card">
+                <div class="weather-loc">
+                    <h3>{{ weather.name }}</h3>
+                    <span class="temp">{{ Math.round(weather.main.temp) }}ºC</span>
+                </div>
+                <div class="weather-status">
+                    <p class="desc">{{ weather.weather[0].description }}</p>
+
+                    <div v-if="weather.weather[0].main=== 'Rain'" class="alert-box rain">
+                        <img width="32" height="32" src="https://img.icons8.com/color/48/rain--v1.png" alt="rain"/>
+                        <span>Chuva prevista - Adapta o teu plano.</span>
+                    </div>
+                    <div v-else class="alert-box sun">
+                        <img width="32" height="32" src="https://img.icons8.com/color/48/sun-star.png" alt="sun-star"/>
+                        <span>Dia perfeito para este hábito!</span>
+                    </div>
+                </div>
             </div>
-        <div v-else class="error-state">
-            <p>Não foi possível encontrar o hábito.</p>
+
+            <section class="progress-section">
+                <div class="section-header">
+                    <h2>Progresso Diario</h2>
+                    <div class="legend">
+                    <div class="legend-item">
+                        <span class="dot done"></span>
+                        <span>Feito</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="dot missed"></span>
+                        <span>Falhado</span>
+                    </div>
+                </div>
+                </div>
+
+                <div class="calendar-wrapper">
+                    <div class="calendar-grid">
+                        <div v-for="label in ['Seg','Ter','Qua','Qui','Sex','Sáb','Dom']" :key="label" class="weekday-label">
+                            {{ label }}
+                        </div>
+
+                        <div v-for="(day, index) in calendarDays" 
+                            :key="day.date || index" 
+                            class="day-cell"
+                            :class="{ 
+                                'completed': day.completed,
+                                'is-today': day.isToday,
+                                'missed': day.isMissed,       
+                                'empty': day.isEmpty 
+                            }">
+                            <span v-if="!day.isEmpty">{{ day.dayOfMonth }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="action-area">
+                    <button 
+                        @click="addCompletion" 
+                        class="btn-primary check-in"
+                        :disabled="loading || isHabitFinished"
+                    >
+                        <span v-if="!isHabitFinished">✔ Efectuar Check-in</span>
+                        <span v-else>Hábito Concluído</span>
+                    </button>
+                    <p v-if="isHabitFinished" class="habit-ended-msg">
+                        Este hábito atingiu a data de término.
+                    </p>
+                </div>
+            </section>
         </div>
-        <button @click="deleteHabit" class="delete-button"> 🗑️ Apagar Hábito</button>
+        <div v-else class="error-state">
+            <p>Hábito não encontrado ou removido</p>
+            <button @click="router.push('/')" class="btn-secondary">Voltar à Home</button>  
+        </div>
     </div>
+    
 </template>
 
 <style scoped>
-.detail-container {
-    padding: 40px;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #0e0018, #180536); 
-    color: white;
-    font-family: Arial, sans-serif;
-}
-.loading-state, .error-state {
-    text-align: center;
-    padding: 50px;
-    font-size: 1.2em;
-}
-.habit-title {
-    font-size: 2.5em;
-    color: #a052ff;
-    margin-bottom: 10px;
-}
-.habit-meta {
-    color: #ccc;
-    margin-bottom: 30px;
-    border-bottom: 1px solid #333;
-    padding-bottom: 15px;
-}
-.calendar-section {
-    margin-top: 40px;
-    padding: 20px;
-    background-color: #1f1f1f;
-    border-radius: 12px;
-}
-.calendar-section h2 {
-    color: #c9a0ff;
-    margin-bottom: 20px;
-    font-size: 1.5em;
-}
-
-/* --- GRELHA DO CALENDÁRIO --- */
-.calendar-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr); 
-    gap: 8px; 
-    padding: 15px 0;
-}
-
-.day-box {
-    padding: 10px;
-    height: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    font-size: 0.9em;
-    font-weight: bold;
-    color: #ccc; 
-    background-color: #2b2b2b; /* Cor neutra para dias pendentes */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-    transition: all 0.2s ease-in-out;
-}
-
-/* Estilo para as legendas dos dias da semana (Seg, Ter, ...) */
-.weekday-label {
-    background-color: #333;
-    color: #999;
-    font-size: 0.8em;
-    text-transform: uppercase;
-    height: 20px;
-    line-height: 20px;
-    padding: 5px;
-}
-
-/* Estilo para Placeholders vazios */
-.empty-day {
-    background-color: transparent; 
-    box-shadow: none;
-}
-
-/* --- ESTADOS DA GRELA (Precedência) --- */
-
-/* 1. Dia COMPLETO (Mais alta precedência) */
-.day-box.completed {
-    background: linear-gradient(135deg, #00b347, #55ff99);
-    color: #1a1a1a;
-    transform: scale(1.05); 
-    border: none; /* Anula qualquer borda anterior */
-}
-
-/* 2. Dia PERDIDO (Aplica-se apenas a dias passados não completos) */
-.day-box.missed {
-    background-color: #7b241c; /* Vermelho escuro/ferrugem */
-    border: 2px solid #e74c3c;
-    color: white; 
-}
-
-/* 3. Dia ATUAL (Aplica-se hoje, sobrepõe-se a 'missed' e ao padrão) */
-/* O dia atual é neutro, apenas com borda para o destacar. */
-.day-box.is-today {
-    background-color: #2b2b2b; /* Volta para a cor neutra do pendente */
-    border: 3px solid #f39c12; /* Borda amarela/laranja forte */
-    color: #ccc; 
-}
-
-
-/* --- BOTÃO DE CHECK-IN --- */
-.check-in-button {
-    display: block;
-    width: 80%;
-    margin: 20px auto 0;
-    padding: 15px;
-    border: none;
-    border-radius: 10px;
-    font-size: 1.1em;
-    font-weight: bold;
-    color: #1a1a1a;
-    background: linear-gradient(to right, #00d463, #38ff93); 
-    cursor: pointer;
-    transition: background 0.3s, opacity 0.3s;
-}
-.check-in-button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-.delete-button {
-  margin-top: 20px;
-  background: #ff3b3b;
-  color: white;
-  border: none;
-  padding: 12px;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.delete-button:hover {
-  background: #d63030;
-}
-
-.habit-ended-msg {
-  margin-top: 10px;
-  color: #ff6b6b;
-  font-weight: bold;
-}
-.weather-card {
-  background: rgba(255,255,255,0.1);
-  border-radius: 12px;
-  padding: 16px;
-  margin: 16px 0;
-  color: white;
-  text-align: center;
-}
-</style>
+    .detail-wrapper {
+        padding: 120px 20px 60px; /* Espaço para a Navbar fixa */
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .habit-container {
+        width: 100%;
+        max-width: 800px;
+        animation: fadeIn 0.5s ease;
+    }
+    
+    /* Header */
+    .habit-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 30px;
+    }
+    
+    .habit-title {
+        font-size: 2.8rem;
+        font-weight: 800;
+        background: linear-gradient(90deg, #ffffff, #c37eff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 10px;
+    }
+    
+    .habit-badges {
+        display: flex;
+        gap: 10px;
+    }
+    
+    .badge {
+        padding: 4px 12px;
+        border-radius: 50px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .badge.category { background: rgba(195, 126, 255, 0.2); color: #c37eff; border: 1px solid rgba(195, 126, 255, 0.3); }
+    .badge.date { background: rgba(255, 255, 255, 0.05); color: rgba(255,255,255,0.6); }
+    
+    /* Clima Card */
+    .weather-glass-card {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 24px;
+        padding: 25px;
+        margin-bottom: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .weather-loc h3 { font-size: 0.9rem; color: rgba(255,255,255,0.5); text-transform: uppercase; }
+    .weather-loc .temp { font-size: 2rem; font-weight: 800; }
+    
+    .alert-box {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 15px;
+        border-radius: 12px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-top: 10px;
+    }
+    
+    .alert-box.rain { background: rgba(59, 130, 246, 0.1); color: #93c5fd; }
+    .alert-box.sun { background: rgba(255, 207, 84, 0.1); color: #ffe08a; }
+    
+    /* Calendário */
+    .progress-section {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 30px;
+        padding: 30px;
+    }
+    
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+    }
+    
+    .legend { font-size: 0.8rem; color: rgba(255,255,255,0.5); }
+    .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-left: 10px; }
+    .dot.done { background: #00d463; }
+    .dot.missed { background: #ff4d4d; }
+    
+    .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 10px;
+    }
+    
+    .weekday-label {
+        text-align: center;
+        font-size: 0.7rem;
+        font-weight: 800;
+        color: rgba(255,255,255,0.3);
+        text-transform: uppercase;
+        padding-bottom: 10px;
+    }
+    
+    .day-cell {
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.03);
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: rgba(255,255,255,0.4);
+        transition: all 0.2s;
+    }
+    
+    .day-cell.completed { background: #00d463; color: #000; box-shadow: 0 0 15px rgba(0, 212, 99, 0.3); }
+    .day-cell.missed { background: rgba(255, 77, 77, 0.1); border: 1px solid rgba(255, 77, 77, 0.3); color: #ff4d4d; }
+    .day-cell.is-today { border: 2px solid #c37eff; color: #fff; }
+    .day-cell.empty { background: transparent; }
+    
+    /* Botões */
+    .action-area { text-align: center; margin-top: 30px; }
+    
+    .btn-primary {
+        padding: 16px 40px;
+        border-radius: 50px;
+        border: none;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    
+    .btn-primary.check-in {
+        background: linear-gradient(90deg, #9955ff, #c37eff);
+        color: white;
+        box-shadow: 0 10px 20px rgba(153, 85, 255, 0.2);
+    }
+    
+    .btn-primary:disabled { opacity: 0.3; cursor: not-allowed; filter: grayscale(1); }
+    
+    .btn-icon-delete {
+        background: rgba(255, 59, 59, 0.1);
+        border: 1px solid rgba(255, 59, 59, 0.2);
+        padding: 10px;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    
+    .btn-icon-delete:hover { background: #ff3b3b; transform: scale(1.1); }
+    
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    
+    @media (max-width: 600px) {
+        .habit-header { flex-direction: column; gap: 15px; }
+        .weather-glass-card { flex-direction: column; text-align: center; gap: 20px; }
+    }
+    </style>

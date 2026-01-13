@@ -201,10 +201,57 @@ onMounted(() => {
     background: linear-gradient(90deg, #00ff88, #00ccff);
     transition: width 0.3s ease;
   }
-  .chart-card {
-  margin-top: 30px;
+  .charts-section {
+  width: 100%;
+  max-width: 1100px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  gap: 25px;
+  margin-top: 40px;
   padding: 20px;
-  background: rgba(255,255,255,0.08);
-  border-radius: 12px;
+}
+
+.chart-card {
+  background-color: #0d0d0d; 
+  border: 1px solid #222;    
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  transition: border-color 0.3s ease;
+}
+
+.chart-card:hover {
+  border-color: #c37eff; 
+}
+
+/* Títulos dos Gráficos */
+.chart-title {
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.chart-title i {
+  color: #c37eff; 
+}
+
+.chart-container {
+  position: relative;
+  height: 300px;
+  width: 100%;
+}
+
+/* Responsividade para ecrãs pequenos */
+@media (max-width: 600px) {
+  .charts-section {
+    grid-template-columns: 1fr;
   }
+  .chart-card {
+    padding: 15px;
+  }
+}
   </style>

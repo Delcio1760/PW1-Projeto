@@ -60,22 +60,33 @@ const updatePassword = async () => {
 
 const xpMax = user.level *100
 const xpPercent = Math.min((user.xp/xpMax)*100, 100);
+const badges = [
+  { name: 'Bronze', minXP: 0, icon: '🥉', class: 'badge-bronze' },
+  { name: 'Ouro', minXP: 300, icon: '🥇', class: 'badge-ouro' },
+  { name: 'Platina', minXP: 700, icon: '💎', class: 'badge-platina' },
+  { name: 'Diamante', minXP: 1200, icon: '🔷', class: 'badge-diamante' },
+  { name: 'Mestre', minXP: 2000, icon: '👑', class: 'badge-mestre' }
+];
+
+const currentBadge = badges
+  .slice()
+  .reverse()
+  .find(badge => user.xp >= badge.minXP);
 </script>
 
 <template>
     <div class="background-container">
-      
       <div class="profile-card">
   
         <h1 class="title">👤 Perfil de {{ user.nome }}</h1>
-        <p class="subtitle">Bem-vindo(a)! Aqui estão os seus dados de conta e progresso.</p>
-        
+        <p class="subtitle">
+          Consulta os teus dados e a tua classificação atual.
+        </p>
+  
         <div class="main-content-grid">
-          
           <div class="details-column">
-            
             <h2 class="column-title">Detalhes do Utilizador</h2>
-
+  
             <div class="detail-group">
               <span class="icon">📧</span>
               <div class="info">
@@ -83,7 +94,7 @@ const xpPercent = Math.min((user.xp/xpMax)*100, 100);
                 <p>{{ user.email }}</p>
               </div>
             </div>
-            
+  
             <div class="detail-group">
               <span class="icon">✨</span>
               <div class="info">
@@ -91,68 +102,80 @@ const xpPercent = Math.min((user.xp/xpMax)*100, 100);
                 <p class="level-text">Nível {{ user.level }}</p>
               </div>
             </div>
-    
+  
             <div class="detail-group">
               <span class="icon">⭐</span>
               <div class="info">
-                <label>Experiência (XP)</label>
+                <label>XP Total</label>
                 <p>{{ user.xp }} XP</p>
               </div>
             </div>
+          </div>
 
-          </div> <div class="xp-column">
-            
-            <h2 class="column-title">Progresso</h2>
-
-            <div class="xp-progress">
-              <label>Próximo Nível</label>
-              <div class="progress-bar">
-              <div class="progress-fill" :style="{ width: `${xpPercent}%` }"></div>
-              </div>
-              <span class="xp-value">{{ user.xp % 100 }}/{{ xpMax }} XP</span>
+          <div class="xp-column">
+            <h2 class="column-title">🏆 Classificação</h2>
+  
+            <div class="badge-card" :class="currentBadge.class">
+              <span class="badge-icon">{{ currentBadge.icon }}</span>
+              <h3 class="badge-name">{{ currentBadge.name }}</h3>
+              <p class="badge-xp">{{ user.xp }} XP Total</p>
             </div>
-
-          </div> </div> <div class="password-section">
+  
+            <p class="badge-next" v-if="nextBadge">
+              Próximo badge em
+              <strong>{{ nextBadge.minXP - user.xp }} XP</strong>
+            </p>
+  
+            <p class="badge-next" v-else>
+              🔥 Classificação Máxima Atingida
+            </p>
+          </div>
+  
+        </div>
+  
+        <div class="password-section">
           <h2 class="section-title">🔐 Alterar Palavra-Passe</h2>
-          
+  
           <form @submit.prevent="updatePassword" class="password-form">
             <div class="input-group">
-                <label for="new-pass">Nova Palavra-Passe</label>
-                <input 
-                    type="password" 
-                    id="new-pass"
-                    v-model="newPassword" 
-                    placeholder="Introduza a nova palavra-passe"
-                />
+              <label>Nova Palavra-Passe</label>
+              <input
+                type="password"
+                v-model="newPassword"
+                placeholder="Introduza a nova palavra-passe"
+              />
             </div>
-            
+  
             <div class="input-group">
-                <label for="confirm-pass">Confirmar Palavra-Passe</label>
-                <input 
-                    type="password" 
-                    id="confirm-pass"
-                    v-model="confirmPassword" 
-                    placeholder="Confirme a nova palavra-passe"
-                />
+              <label>Confirmar Palavra-Passe</label>
+              <input
+                type="password"
+                v-model="confirmPassword"
+                placeholder="Confirme a nova palavra-passe"
+              />
             </div>
-            
-            <p v-if="passwordMsg" :class="passwordMsg.startsWith('✅') ? 'msg-success' : 'msg-error'">
-                {{ passwordMsg }}
+  
+            <p
+              v-if="passwordMsg"
+              :class="passwordMsg.startsWith('✅') ? 'msg-success' : 'msg-error'"
+            >
+              {{ passwordMsg }}
             </p>
-
-            <button type="submit" class="update-pass-btn">Atualizar Palavra-Passe</button>
-            
+  
+            <button type="submit" class="update-pass-btn">
+              Atualizar Palavra-Passe
+            </button>
           </form>
         </div>
-        
+  
         <button @click="doLogout" class="logout-btn">
-          <span class="icon">🔒</span> Terminar Sessão
+          🔒 Terminar Sessão
         </button>
   
       </div>
     </div>
-</template>
-    
+  </template>
+     
 <style scoped>
 /* 1. BACKGROUND E CENTRALIZAÇÃO */
 .background-container {
@@ -384,4 +407,48 @@ const xpPercent = Math.min((user.xp/xpMax)*100, 100);
 .logout-btn:hover {
     background-color: #6e0808;
 }
+
+/* 8. Estelizacao dos Badjes*/
+.badge-card {
+  padding: 24px;
+  border-radius: 20px;
+  text-align: center;
+  backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.08);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  transition: transform 0.3s ease;
+}
+
+.badge-card:hover {
+  transform: translateY(-6px);
+}
+
+.badge-icon {
+  font-size: 48px;
+}
+
+.badge-name {
+  font-size: 22px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.badge-xp {
+  opacity: 0.8;
+  margin-top: 6px;
+}
+
+/* Cores por badge */
+.badge-bronze { border: 2px solid #cd7f32; }
+.badge-ouro { border: 2px solid #ffd700; }
+.badge-platina { border: 2px solid #8ee4d1; }
+.badge-diamante { border: 2px solid #4fc3f7; }
+.badge-mestre { border: 2px solid #c084fc; }
+
+.badge-next {
+  margin-top: 12px;
+  font-size: 14px;
+  opacity: 0.85;
+}
+
 </style>
