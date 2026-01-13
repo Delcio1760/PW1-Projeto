@@ -6,7 +6,7 @@
       "email": "delcio@gmail.com",
       "password": "Delcio123",
       "level": 3,
-      "xp": 120
+      "xp": 220
     },
     {
       "id": "2",
@@ -87,6 +87,56 @@
       "userId": "1",
       "startTime": "00:00",
       "endTime": "23:59"
+    },
+    {
+      "id": "1f06",
+      "name": "chapada",
+      "start": "2026-01-13",
+      "end": "2026-01-24",
+      "category": "outdoor",
+      "userId": "1",
+      "startTime": "00:00",
+      "endTime": "23:59"
+    },
+    {
+      "id": "503c",
+      "name": "aquilo",
+      "start": "2026-01-13",
+      "end": "2026-01-21",
+      "category": "indoor",
+      "userId": "1",
+      "startTime": "00:00",
+      "endTime": "23:59"
+    },
+    {
+      "id": "498f",
+      "name": "jdnidnj",
+      "start": "2026-01-13",
+      "end": "2026-01-22",
+      "category": "indoor",
+      "userId": "1",
+      "startTime": "00:00",
+      "endTime": "23:59"
+    },
+    {
+      "id": "fde3",
+      "name": "jndjdn",
+      "start": "2026-01-13",
+      "end": "2026-01-26",
+      "category": "indoor",
+      "userId": "1",
+      "startTime": "00:00",
+      "endTime": "23:59"
+    },
+    {
+      "id": "2cfd",
+      "name": "aquilo",
+      "start": "2026-01-15",
+      "end": "2026-01-21",
+      "category": "indoor",
+      "userId": "1",
+      "startTime": "00:00",
+      "endTime": "23:59"
     }
   ],
   "completions": [
@@ -107,6 +157,36 @@
       "userId": "1",
       "habitId": "1c96",
       "date": "2026-01-10"
+    },
+    {
+      "id": "44f8",
+      "userId": "1",
+      "habitId": "1f06",
+      "date": "2026-01-13"
+    },
+    {
+      "id": "7eee",
+      "userId": "1",
+      "habitId": "503c",
+      "date": "2026-01-13"
+    },
+    {
+      "id": "cd51",
+      "userId": "1",
+      "habitId": "498f",
+      "date": "2026-01-13"
+    },
+    {
+      "id": "73c4",
+      "userId": "1",
+      "habitId": "fde3",
+      "date": "2026-01-13"
+    },
+    {
+      "id": "09c1",
+      "userId": "1",
+      "habitId": "2cfd",
+      "date": "2026-01-13"
     }
   ]
 }

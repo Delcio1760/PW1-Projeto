@@ -5,6 +5,7 @@ import { useRouter } from "vue-router";
 import Popup from "../components/PopUp.vue";
 import { Chart, plugins } from 'chart.js/auto';
 
+
 const authStore = useAuthStore();
 const router = useRouter();
 

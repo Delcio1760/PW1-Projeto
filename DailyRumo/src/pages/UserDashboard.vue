@@ -1,19 +1,19 @@
 <template>
   <div class="dashboard-container">
-    <h1>📊 Dashboard de Progresso</h1>
+    <h1><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMS43NSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1jaGFydC1uby1heGVzLWNvbWJpbmVkLWljb24gbHVjaWRlLWNoYXJ0LW5vLWF4ZXMtY29tYmluZWQiPjxwYXRoIGQ9Ik0xMiAxNnY1Ii8+PHBhdGggZD0iTTE2IDE0djciLz48cGF0aCBkPSJNMjAgMTB2MTEiLz48cGF0aCBkPSJtMjIgMy04LjY0NiA4LjY0NmEuNS41IDAgMCAxLS43MDggMEw5LjM1NCA4LjM1NGEuNS41IDAgMCAwLS43MDcgMEwyIDE1Ii8+PHBhdGggZD0iTTQgMTh2MyIvPjxwYXRoIGQ9Ik04IDE0djciLz48L3N2Zz4=" alt=""> Dashboard de Progresso</h1>
 
     <div class="stats-card">
       <h2>Bem-vindo, {{ user.nome }}!</h2>
 
-      <p>⭐ Nível: {{ user.level }}</p>
-      <p>🔥 XP atual: {{ user.xp }} / {{ xpMax }} XP</p>
+      <p> Nível: {{ user.level }}</p>
+      <p> XP atual: {{ user.xp }} / {{ xpMax }} XP</p>
       
       <div class="progress-bar">
         <div class="progress-fill" :style="{ width: xpPercent + '%' }"></div>
       </div>
 
       <p>✅ Check-ins esta semana: {{ weeklyCompletions }}</p>
-      <p>Streak atual: {{ currentStreak }} dias</p>
+      <p><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZjdiMDAiIHN0cm9rZS13aWR0aD0iMS43NSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1mbGFtZS1pY29uIGx1Y2lkZS1mbGFtZSI+PHBhdGggZD0iTTEyIDNxMSA0IDQgNi41dDMgNS41YTEgMSAwIDAgMS0xNCAwIDUgNSAwIDAgMSAxLTMgMSAxIDAgMCAwIDUgMGMwLTItMS41LTMtMS41LTVxMC0yIDIuNS00Ii8+PC9zdmc+" alt="">Streak atual: {{ currentStreak }} dias</p>
       <p>Melhor Streak: {{ bestStreak }} dias</p>
     </div>
     <div class="chart-card" v-show="chartReady">

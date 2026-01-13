@@ -113,7 +113,7 @@ const currentBadge = badges
           </div>
 
           <div class="xp-column">
-            <h2 class="column-title">🏆 Classificação</h2>
+            <h2 class="column-title"><img src="https://img.icons8.com/?size=100&id=PtZxNy4USBsL&format=png&color=000000" alt=""> Classificação</h2>
   
             <div class="badge-card" :class="currentBadge.class">
               <span class="badge-icon">{{ currentBadge.icon }}</span>
@@ -134,7 +134,7 @@ const currentBadge = badges
         </div>
   
         <div class="password-section">
-          <h2 class="section-title">🔐 Alterar Palavra-Passe</h2>
+          <h2 class="section-title">Alterar Palavra-Passe <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1sb2NrLWljb24gbHVjaWRlLWxvY2siPjxyZWN0IHdpZHRoPSIxOCIgaGVpZ2h0PSIxMSIgeD0iMyIgeT0iMTEiIHJ4PSIyIiByeT0iMiIvPjxwYXRoIGQ9Ik03IDExVjdhNSA1IDAgMCAxIDEwIDB2NCIvPjwvc3ZnPg==" alt=""> </h2>
   
           <form @submit.prevent="updatePassword" class="password-form">
             <div class="input-group">
@@ -169,7 +169,7 @@ const currentBadge = badges
         </div>
   
         <button @click="doLogout" class="logout-btn">
-          🔒 Terminar Sessão
+          <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1sb2NrLWljb24gbHVjaWRlLWxvY2siPjxyZWN0IHdpZHRoPSIxOCIgaGVpZ2h0PSIxMSIgeD0iMyIgeT0iMTEiIHJ4PSIyIiByeT0iMiIvPjxwYXRoIGQ9Ik03IDExVjdhNSA1IDAgMCAxIDEwIDB2NCIvPjwvc3ZnPg==" alt=""> Terminar Sessão
         </button>
   
       </div>
@@ -183,7 +183,7 @@ const currentBadge = badges
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #0f0f0f, #1e0b3e);
+  background: linear-gradient(135deg, #000000, #000000);
   padding: 20px;
 }
 

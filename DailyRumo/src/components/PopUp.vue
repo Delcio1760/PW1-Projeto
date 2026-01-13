@@ -34,9 +34,9 @@
     border-radius: 12px;
     width: 280px;
     text-align: center;
-    color: #fff;
-    border: 2px solid #d100ff;
-    box-shadow: 0 0 12px #d100ff;
+
+    border: 2px solid 
+    
   }
   
   button {
@@ -44,7 +44,7 @@
     padding: 8px 18px;
     border-radius: 6px;
     border: none;
-    background: #d100ff;
+    background: #2a0433;
     color: white;
     font-weight: bold;
     cursor: pointer;
