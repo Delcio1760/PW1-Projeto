@@ -90,7 +90,7 @@ const loadWeeklyChart = async () => {
 
       <div class="cards-wrapper">
         <div class="glass-card" @click="openCategory('indoor')">
-          <div class="icon-wrapper">🏠</div>
+          <div class="icon-wrapper"><img src="https://img.icons8.com/?size=100&id=tNcJ7GGjHsUq&format=png&color=000000" alt=""></div>
           <div class="card-content">
             <h2>Indoor</h2>
             <p>Foco total no teu espaço interior. Ideal para leitura e meditação.</p>
@@ -99,7 +99,7 @@ const loadWeeklyChart = async () => {
         </div>
 
         <div class="glass-card" @click="openCategory('outdoor')">
-          <div class="icon-wrapper">🌳</div>
+          <div class="icon-wrapper"><img src="https://img.icons8.com/?size=100&id=QHLdZSmc4FXT&format=png&color=000000" alt=""></div>
           <div class="card-content">
             <h2>Outdoor</h2>
             <p>Atividades ao ar livre com integração meteorológica inteligente.</p>
