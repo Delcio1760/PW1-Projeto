@@ -6,7 +6,7 @@
       "email": "delcio@gmail.com",
       "password": "Delcio123",
       "level": 3,
-      "xp": 220
+      "xp": 240
     },
     {
       "id": "2",
@@ -60,16 +60,6 @@
   "habits": [
     {
       "id": "f4e0",
-      "name": "Correr 10Km",
-      "start": "2026-01-09",
-      "end": "2026-01-10",
-      "category": "outdoor",
-      "userId": "1",
-      "startTime": "00:00",
-      "endTime": "23:59"
-    },
-    {
-      "id": "0673",
       "name": "Correr 10Km",
       "start": "2026-01-09",
       "end": "2026-01-10",
@@ -147,12 +137,6 @@
       "date": "2026-01-10"
     },
     {
-      "id": "e9f8",
-      "userId": "1",
-      "habitId": "0673",
-      "date": "2026-01-10"
-    },
-    {
       "id": "3a35",
       "userId": "1",
       "habitId": "1c96",
@@ -187,6 +171,12 @@
       "userId": "1",
       "habitId": "2cfd",
       "date": "2026-01-13"
+    },
+    {
+      "id": "88d4",
+      "userId": "1",
+      "habitId": "1f06",
+      "date": "2026-01-15"
     }
   ]
 }
