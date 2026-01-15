@@ -61,11 +61,37 @@ const updatePassword = async () => {
 const xpMax = user.level *100
 const xpPercent = Math.min((user.xp/xpMax)*100, 100);
 const badges = [
-  { name: 'Bronze', minXP: 0, icon: '🥉', class: 'badge-bronze' },
-  { name: 'Ouro', minXP: 300, icon: '🥇', class: 'badge-ouro' },
-  { name: 'Platina', minXP: 700, icon: '💎', class: 'badge-platina' },
-  { name: 'Diamante', minXP: 1200, icon: '🔷', class: 'badge-diamante' },
-  { name: 'Mestre', minXP: 2000, icon: '👑', class: 'badge-mestre' }
+  {
+    name:'Bronze',
+    minXP: 0,
+    icon: 'https://img.icons8.com/?size=100&id=23875&format=png&color=000000',
+    class: 'badge-bronze'
+  },
+  {
+    name:'Ouro',
+    minXP: 300,
+    icon: 'https://img.icons8.com/color/48/gold-medal.png',
+    class: 'badge-ouro'
+  },
+  {
+    name:'Platina',
+    minXp: 700,
+    icon: 'https://img.icons8.com/color/48/jewel.png',
+    class:'badge-platina'
+  },
+  {
+    name: 'Diamante',
+    minXP: 1200,
+    icon:'https://img.icons8.com/color/48/jewel.png',
+    class: 'badge-diamante'
+  },
+  {
+    name: 'Mestre',
+    minXP: 2000,
+    icon: 'https://img.icons8.com/?size=100&id=15283&format=png&color=000000',
+    class: 'badge-mestre'
+
+  }
 ];
 
 const currentBadge = badges
@@ -88,7 +114,9 @@ const currentBadge = badges
             <h2 class="column-title">Detalhes do Utilizador</h2>
   
             <div class="detail-group">
-              <span class="icon">📧</span>
+              <div class="icon-wrapper">
+                <img src="https://img.icons8.com/?size=100&id=3AYCSzCO85Qw&format=png&color=000000" alt="email" class="detail-icon-img" />
+              </div>
               <div class="info">
                 <label>Email</label>
                 <p>{{ user.email }}</p>
@@ -96,30 +124,37 @@ const currentBadge = badges
             </div>
   
             <div class="detail-group">
-              <span class="icon">✨</span>
+              <div class="icon-wrapper">
+                <img src="https://img.icons8.com/color/48/star-trek-symbol.png" alt="nivel" class="detail-icon-img" />
+              </div>
               <div class="info">
                 <label>Nível</label>
                 <p class="level-text">Nível {{ user.level }}</p>
               </div>
-            </div>
+          </div>
   
-            <div class="detail-group">
-              <span class="icon">⭐</span>
-              <div class="info">
-                <label>XP Total</label>
-                <p>{{ user.xp }} XP</p>
-              </div>
+          <div class="detail-group">
+            <div class="icon-wrapper">
+              <img src="https://img.icons8.com/color/48/flash-on.png" alt="xp" class="detail-icon-img" />
+            </div>
+            <div class="info">
+              <label>XP Total</label>
+              <p>{{ user.xp }} XP</p>
+            </div>
             </div>
           </div>
 
           <div class="xp-column">
             <h2 class="column-title">🏆 Classificação</h2>
   
-            <div class="badge-card" :class="currentBadge.class">
-              <span class="badge-icon">{{ currentBadge.icon }}</span>
-              <h3 class="badge-name">{{ currentBadge.name }}</h3>
-              <p class="badge-xp">{{ user.xp }} XP Total</p>
-            </div>
+
+              <div class="badge-card" :class="currentBadge.class">
+                <div class="badge-icon-container">
+                  <img :src="currentBadge.icon" :alt="currentBadge.name" class="badge-img" />
+                </div>
+                <h3 class="badge-name">{{ currentBadge.name }}</h3>
+                <p class="badge-xp">{{ user.xp }} XP Total</p>
+              </div>
   
             <p class="badge-next" v-if="nextBadge">
               Próximo badge em
@@ -247,18 +282,34 @@ const currentBadge = badges
 }
 
 .detail-group {
-    display: flex;
-    align-items: center;
-    background-color: #2b2b2b;
-    padding: 15px;
-    border-radius: 10px;
-    border-left: 4px solid #9955ff;
+   display: flex;
+   align-items: center;
+   gap: 15px;
+   margin-bottom: 20px;
+   background: rba(255,255,255, 0.03);
+   padding: 12px 16px;
+   border-radius: 16px;
+   border: 1px solid rgba(255, 255, 255, 0.05)
 }
 
-.icon {
-    font-size: 24px;
-    margin-right: 15px;
-    color: #c37eff;
+/* Container do ícone */
+.icon-wrapper {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(195, 126, 255, 0.1);
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+/* Estilo da imagem do ícone */
+.detail-icon-img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.1));
 }
 
 .info {
@@ -266,20 +317,22 @@ const currentBadge = badges
 }
 
 .info label {
-    font-size: 12px;
-    color: #aaa;
-    display: block;
-    margin-bottom: 2px;
+  display: block;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
 }
 
 .info p {
-    font-size: 16px;
-    margin: 0;
-    font-weight: bold;
+  margin: 0;
+  font-weight: 600;
+  color: #fff;
 }
 
 .level-text {
-    color: #55ff99; 
+  color: #c37eff !important; /* Destaque para o nível */
 }
 
 /* 5. BARRA DE PROGRESSO (RE-ESTILIZADA E POSICIONADA) */
@@ -410,45 +463,71 @@ const currentBadge = badges
 
 /* 8. Estelizacao dos Badjes*/
 .badge-card {
-  padding: 24px;
-  border-radius: 20px;
+  padding: 32px 24px; /* Mais espaço interno */
+  border-radius: 24px;
   text-align: center;
   backdrop-filter: blur(12px);
-  background: rgba(255,255,255,0.08);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-  transition: transform 0.3s ease;
+  background: rgba(255, 255, 255, 0.04);
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center;
+  
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 200px; 
 }
 
-.badge-card:hover {
-  transform: translateY(-6px);
+/* Container do Ícone */
+.badge-icon-container {
+  width: 80px;  
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  background: rgba(255, 255, 255, 0.05); /* Um círculo subtil atrás da medalha */
+  border-radius: 50%;
 }
 
-.badge-icon {
-  font-size: 48px;
+.badge-img {
+  width: 60px;   
+  height: 60px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.2));
 }
 
+/* Tipografia dentro do Card */
 .badge-name {
-  font-size: 22px;
-  font-weight: 600;
-  margin-top: 10px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin: 0;
+  color: #fff;
 }
 
 .badge-xp {
-  opacity: 0.8;
-  margin-top: 6px;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 8px;
+  font-weight: 500;
+}
+.badge-bronze { 
+  border: 1px solid rgba(205, 127, 50, 0.5); 
+  background: linear-gradient(180deg, rgba(205, 127, 50, 0.1) 0%, transparent 100%);
 }
 
-/* Cores por badge */
-.badge-bronze { border: 2px solid #cd7f32; }
-.badge-ouro { border: 2px solid #ffd700; }
-.badge-platina { border: 2px solid #8ee4d1; }
-.badge-diamante { border: 2px solid #4fc3f7; }
-.badge-mestre { border: 2px solid #c084fc; }
+.badge-platina { border: 2px solid #8ee4d1; box-shadow: 0 0 15px rgba(142, 228, 209, 0.1); }
 
-.badge-next {
-  margin-top: 12px;
-  font-size: 14px;
-  opacity: 0.85;
+.badge-ouro { 
+  border: 1px solid rgba(255, 215, 0, 0.5); 
+  background: linear-gradient(180deg, rgba(255, 215, 0, 0.1) 0%, transparent 100%);
 }
+
+.badge-diamante { 
+  border: 1px solid rgba(79, 195, 247, 0.5); 
+  background: linear-gradient(180deg, rgba(79, 195, 247, 0.1) 0%, transparent 100%);
+}
+.badge-mestre { border: 2px solid #c084fc; box-shadow: 0 0 15px rgba(192, 132, 252, 0.1); }
+
 
 </style>
