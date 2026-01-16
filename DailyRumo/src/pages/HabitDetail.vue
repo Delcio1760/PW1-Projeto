@@ -7,9 +7,16 @@ import { getWeatherByCity } from '@/services/weatherService'
 
 
 
-const weather = ref(null)
-const weatherError = ref(null)
-const city = "Porto"
+const weather = ref(null);
+const weatherError = ref(null);
+const city = "Porto";
+
+
+const isBadWeather = computed(()=> {
+    const main =  weather.value?.weather?.[0]?.main;
+    return ['Rain', 'Drizzle', 'Thunderstorm'].includes(main);
+});
+
 
 
 const isHabitFinished = computed(() => {
@@ -254,7 +261,7 @@ const deleteHabit = async () => {
                 <div class="weather-status">
                     <p class="desc">{{ weather.weather[0].description }}</p>
 
-                    <div v-if="weather.weather[0].main=== 'Rain'" class="alert-box rain">
+                    <div v-if="isBadWeather" class="alert-box rain">
                         <img width="32" height="32" src="https://img.icons8.com/color/48/rain--v1.png" alt="rain"/>
                         <span>Chuva prevista - Adapta o teu plano.</span>
                     </div>
