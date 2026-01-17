@@ -4,7 +4,11 @@ import { useAuthStore } from "../stores/authStore";
 import { useRouter } from "vue-router";
 import Popup from "../components/PopUp.vue";
 import { Chart, plugins } from 'chart.js/auto';
+import {getWeatherByCity} from '@/services/weatherService'
 
+const weather = ref(null);
+const weatherError = ref(null);
+const city = "Porto";
 
 const authStore = useAuthStore();
 const router = useRouter();
@@ -68,10 +72,17 @@ const loadWeeklyChart = async () => {
     }
   });
 };
- onMounted(() =>{
+ onMounted(async() =>{
   if(authStore.user){
     loadWeeklyChart();
+    try{
+    const data = await getWeatherByCity(city);
+    weather.value = data;
+  }catch(err){
+    weatherError.value = "Não possivel carregar o tempo!";
   }
+  }
+  
  });
 
 </script>
@@ -87,6 +98,14 @@ const loadWeeklyChart = async () => {
         </h1>
         <p class="tagline">Gira os teus hábitos de acordo com o teu ambiente.</p>
       </header>
+
+      <div v-if="weather" class="weather-loc">
+        <h3>{{ weather.name }}</h3>
+        <div class="temp">
+          <img :src="`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`" alt="Weather Icon" width="50" />
+          {{ Math.round(weather.main.temp) }}
+        </div>
+      </div>
 
       <div class="cards-wrapper">
         <div class="glass-card" @click="openCategory('indoor')">
@@ -351,5 +370,37 @@ const loadWeeklyChart = async () => {
   margin-bottom: 20px;
   font-size: 1.3rem;
 }
+.weather-loc {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 40px 0; 
+  gap: 5px;
+}
+.weather-loc h3 {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin: 0;
+}
+.weather-loc .temp {
+  font-size: 3.5rem; 
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  line-height: 1;
+}
+
+.weather-loc .temp img {
+  margin-right: -10px; 
+  filter: drop-shadow(0 0 8px rgba(255,255,255,0.2));
+}
+.weather-loc .temp::after {
+  content: "°C";
+  font-size: 1.5rem;
+  margin-left: 5px;
+  color: #a855f7; /* Um toque de cor apenas na unidade */
+}
   </style>
-    
