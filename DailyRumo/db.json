@@ -5,8 +5,8 @@
       "nome": "Delcio",
       "email": "delcio@gmail.com",
       "password": "Delcio123",
-      "level": 3,
-      "xp": 280
+      "level": 4,
+      "xp": 20
     },
     {
       "id": "2",
@@ -189,6 +189,18 @@
       "userId": "1",
       "habitId": "1f06",
       "date": "2026-01-17"
+    },
+    {
+      "id": "8af6",
+      "userId": "1",
+      "habitId": "2cfd",
+      "date": "2026-01-17"
+    },
+    {
+      "id": "141b",
+      "userId": "1",
+      "habitId": "498f",
+      "date": "2026-01-18"
     }
   ]
 }

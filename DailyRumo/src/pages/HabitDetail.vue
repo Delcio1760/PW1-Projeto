@@ -4,7 +4,7 @@ import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/authStore';
 import { computed } from 'vue';
 import { getWeatherByCity } from '@/services/weatherService'
-
+import { getIndoorSugestion } from '@/services/sugestionService';
 
 
 const weather = ref(null);
@@ -16,6 +16,8 @@ const isBadWeather = computed(()=> {
     const main =  weather.value?.weather?.[0]?.main;
     return ['Rain', 'Drizzle', 'Thunderstorm'].includes(main);
 });
+
+const sugestion = ref("");
 
 
 
@@ -110,6 +112,10 @@ const loadHabitData = async () => {
         }
         
         habit.value = await habitResponse.json();
+
+        if(habit.value && habit.value.category === 'indoor'){
+            sugestion.value = getIndoorSugestion();
+        }
 
         // 4. Obter os check-ins (completions) específicos deste hábito
         const completionsResponse = await fetch(`${baseUrl}/completions?habitId=${habitId}`);
@@ -272,6 +278,12 @@ const deleteHabit = async () => {
                 </div>
             </div>
 
+        <div v-if="habit && habit.category === 'indoor' && sugestion" class="weather-glass-card sugestion-card">
+            <div class="sugestion-body">
+                <p class="sugestion-quote">{{ sugestion }}</p>
+            </div>
+        </div>
+
             <section class="progress-section">
                 <div class="section-header">
                     <h2>Progresso Diario</h2>
@@ -406,6 +418,21 @@ const deleteHabit = async () => {
     
     .alert-box.rain { background: rgba(59, 130, 246, 0.1); color: #93c5fd; }
     .alert-box.sun { background: rgba(255, 207, 84, 0.1); color: #ffe08a; }
+
+    .suggestion-card {
+    justify-content: center;
+    min-height: 100px;
+    padding: 30px;
+}
+
+.suggestion-quote {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #fff;
+    font-style: italic;
+    text-align: center;
+    margin: 0;
+}
     
     /* Calendário */
     .progress-section {
