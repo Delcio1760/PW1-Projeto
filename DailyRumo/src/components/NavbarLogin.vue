@@ -9,9 +9,15 @@
       </div>
       
       <div class="nav-auth">
+        <div class="create-habit">
+          <button class="btn-create" @click="goToCreateHabit">
+            <img src="https://img.icons8.com/?size=100&id=14092&format=png&color=c37eff" alt="Criar Hábito" />
+          </button>
+        </div>
         <button v-if="auth.user" @click="logout" class="auth-btn logout">Sair</button>
         <router-link v-else to="/login" class="auth-btn login">Login</router-link>
       </div>
+
     </nav>
   </div>
 </template>
@@ -24,6 +30,13 @@ const auth = useAuthStore();
 
 const logout = () => {
   auth.logout();
+};
+
+const goToCreateHabit = () => {
+  router.push({ 
+    name: 'CreateHabit', 
+    params: { category: 'indoor' }
+  });
 };
 </script>
   
@@ -115,6 +128,47 @@ const logout = () => {
     color: white;
     border: 1px solid rgba(255, 255, 255, 0.3);
   }
+
+  /* Container de Auth agora organiza os dois botões */
+.nav-auth {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Espaço entre o botão de criar e o de sair */
+}
+
+.create-habit {
+  display: flex;
+  align-items: center;
+}
+
+.btn-create {
+  width: 42px; /* Ligeiramente menor para não competir com o botão principal */
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(195, 126, 255, 0.1);
+  border: 1px solid rgba(195, 126, 255, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-create img {
+  width: 22px;
+  height: 22px;
+}
+
+.btn-create:hover {
+  background: rgba(195, 126, 255, 0.2);
+  transform: scale(1.1) rotate(90deg);
+  border-color: #c37eff;
+}
+
+/* Efeito ao clicar */
+.btn-create:active {
+  transform: scale(0.95);
+}
   
   /* Responsividade */
   @media (max-width: 800px) {

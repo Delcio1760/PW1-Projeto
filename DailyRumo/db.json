@@ -6,7 +6,7 @@
       "email": "delcio@gmail.com",
       "password": "Delcio123",
       "level": 4,
-      "xp": 20
+      "xp": 300
     },
     {
       "id": "2",
@@ -89,26 +89,6 @@
       "endTime": "23:59"
     },
     {
-      "id": "503c",
-      "name": "aquilo",
-      "start": "2026-01-13",
-      "end": "2026-01-21",
-      "category": "indoor",
-      "userId": "1",
-      "startTime": "00:00",
-      "endTime": "23:59"
-    },
-    {
-      "id": "498f",
-      "name": "jdnidnj",
-      "start": "2026-01-13",
-      "end": "2026-01-22",
-      "category": "indoor",
-      "userId": "1",
-      "startTime": "00:00",
-      "endTime": "23:59"
-    },
-    {
       "id": "fde3",
       "name": "jndjdn",
       "start": "2026-01-13",
@@ -119,10 +99,10 @@
       "endTime": "23:59"
     },
     {
-      "id": "2cfd",
-      "name": "aquilo",
-      "start": "2026-01-15",
-      "end": "2026-01-21",
+      "id": "255f",
+      "name": "Beber 3L de agua",
+      "start": "2026-01-22",
+      "end": "2026-01-25",
       "category": "indoor",
       "userId": "1",
       "startTime": "00:00",
@@ -149,27 +129,9 @@
       "date": "2026-01-13"
     },
     {
-      "id": "7eee",
-      "userId": "1",
-      "habitId": "503c",
-      "date": "2026-01-13"
-    },
-    {
-      "id": "cd51",
-      "userId": "1",
-      "habitId": "498f",
-      "date": "2026-01-13"
-    },
-    {
       "id": "73c4",
       "userId": "1",
       "habitId": "fde3",
-      "date": "2026-01-13"
-    },
-    {
-      "id": "09c1",
-      "userId": "1",
-      "habitId": "2cfd",
       "date": "2026-01-13"
     },
     {
@@ -191,16 +153,22 @@
       "date": "2026-01-17"
     },
     {
-      "id": "8af6",
+      "id": "6161",
       "userId": "1",
-      "habitId": "2cfd",
-      "date": "2026-01-17"
+      "habitId": "1f06",
+      "date": "2026-01-22"
     },
     {
-      "id": "141b",
+      "id": "fa58",
       "userId": "1",
-      "habitId": "498f",
-      "date": "2026-01-18"
+      "habitId": "fde3",
+      "date": "2026-01-22"
+    },
+    {
+      "id": "bcc3",
+      "userId": "1",
+      "habitId": "255f",
+      "date": "2026-01-22"
     }
   ]
 }

@@ -115,9 +115,6 @@ const handlePopupClose = () => {
            <h1 class="title"> Meus Hábitos – {{ category.toUpperCase() }}</h1>
            <p class="subtitle">Aqui pode visualizar, criar e gerir os seus hábitos de {{ category.toLowerCase() }}.</p>
 
-           <button class="add-btn" @click="goToCreate">
-               <span class="plus-icon">➕</span> Criar Novo Hábito
-           </button>
        </header>
 
        <div v-if="loading" class="loading-state">A carregar hábitos...</div>

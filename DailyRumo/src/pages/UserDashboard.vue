@@ -33,7 +33,7 @@
           </div>
           <div class="mini-card highlight">
             <span class="stat-value">
-              <img class="icon-inline" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZjdiMDAiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNMjIgMTEuMDhWMTJhMTAgMTAgMCAxIDEtNS45My05LjE0Ii8+PHBhdGggZD0iTTIyIDQgMTIgMTQuMDEgOSA0Ii8+PC9zdmc+" />
+              <img class="icon-inline" src="https://img.icons8.com/?size=100&id=zD-VLZTPKlpb&format=png&color=000000" />
               {{ currentStreak }}
             </span>
             <span class="stat-label">Streak Atual</span>

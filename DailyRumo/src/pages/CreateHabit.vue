@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import { useRouter } from 'vue-router'; // useRoute removido
+import { useRouter } from 'vue-router'; 
 import { useAuthStore } from '@/stores/authStore'; 
 import { onMounted, defineProps } from 'vue';
 
@@ -14,6 +14,7 @@ const props = defineProps({
 const router = useRouter();
 
 const authStore = useAuthStore();
+
 
 const habitName = ref('');
 const start = ref('');
@@ -81,77 +82,90 @@ const createHabit = async () => {
     error.value = error.message;
    }
 };
+
 </script>
 
 <template>
   <div class="main-container"> 
-    <h1 class="page-header">✨ Criar Hábito</h1>
+    <header class="page-header-section">
+      <img src="https://img.icons8.com/?size=100&id=7LhMaNDFgoYK&format=png&color=000000" class="header-icon" alt="Criar">
+      <h1 class="premium-title">Criar Novo Hábito</h1>
+      <p class="subtitle">Define a tua próxima meta e mantém a consistência.</p>
+    </header>
 
-    <div class="form-card">
+    <div class="form-card glass-effect">
       <form @submit.prevent="createHabit">
         
-        <!-- Nome do hábito -->
-        <div class="section-group">
-          <label for="habit-name" class="label-title">Nome do Hábito</label>
+        <div class="input-group">
+          <label for="habit-name" class="label-title">O que vais conquistar?</label>
           <input
             type="text"
             id="habit-name"
             v-model="habitName"
             required
-            placeholder="Ex: Beber 3L de água"
-            class="input-field"
+            placeholder="Ex: Meditação Matinal"
+            class="premium-input"
           >
         </div>
 
-        <!-- Datas -->
-        <div class="section-group">
-          <label class="label-title">Período</label>
-
-          <div class="date-input-group">
+        <div class="input-group">
+          <label class="label-title">Duração da Jornada</label>
+          <div class="date-grid">
+            
             <div class="date-field">
-              <label for="start-date">📅 Data Início</label>
-              <input
-                type="date"
-                id="start-date"
-                v-model="start"
-                required
-                class="input-field"
+              <span class="date-helper">Início</span>
+              <img src="https://img.icons8.com/?size=100&id=23&format=png&color=c37eff" class="field-icon-svg" alt="calendário">
+              <input 
+                type="date" 
+                v-model="start" 
+                required 
+                class="premium-input with-icon"
               >
             </div>
 
             <div class="date-field">
-              <label for="end-date">🚩 Data Fim</label>
-              <input
-                type="date"
-                id="end-date"
-                v-model="end"
-                required
-                class="input-field"
+              <span class="date-helper">Fim</span>
+              <img src="https://img.icons8.com/?size=100&id=12586&format=png&color=c37eff" class="field-icon-svg" alt="meta">
+              <input 
+                type="date" 
+                v-model="end" 
+                required 
+                class="premium-input with-icon"
               >
             </div>
           </div>
         </div>
 
-        <!-- Categoria -->
-        <div class="section-group">
-          <label class="label-title">Onde vais realizar o hábito?</label>
-          <div class="environment-selector">
-            <label class="radio-label">
-              <input type="radio" v-model="environment" value="indoor"> 🏠 Indoor
+        <div class="input-group">
+          <label class="label-title">Ambiente de Execução</label>
+          <div class="environment-toggle">
+            <label class="toggle-option" :class="{ active: environment === 'indoor' }">
+              <input type="radio" v-model="environment" value="indoor" class="hidden-radio">
+              <div class="option-content">
+                <img src="https://img.icons8.com/?size=100&id=73&format=png&color=c37eff" class="toggle-icon" alt="indoor">
+                <span>Indoor</span>
+              </div>
             </label>
-            <label class="radio-label">
-              <input type="radio" v-model="environment" value="outdoor"> 🌳 Outdoor
+            <label class="toggle-option" :class="{ active: environment === 'outdoor' }">
+              <input type="radio" v-model="environment" value="outdoor" class="hidden-radio">
+              <div class="option-content">
+                <img src="https://img.icons8.com/?size=100&id=63539&format=png&color=c37eff" class="toggle-icon" alt="outdoor">
+                <span>Outdoor</span>
+              </div>
             </label>
           </div>
         </div>
 
-        <!-- Mensagens -->
-        <p v-if="error" class="error-msg">{{ error }}</p>
-        <p v-if="success" class="success-msg">{{ success }}</p>
+        <div class="message-container">
+          <transition name="fade" mode="out-in">
+            <p v-if="error" :key="'err'" class="alert-msg error">{{ error }}</p>
+            <p v-else-if="success" :key="'succ'" class="alert-msg success">{{ success }}</p>
+          </transition>
+        </div>
 
-        <!-- Botão -->
-        <button type="submit" class="submit-btn">
-          <span class="icon">✔️</span> Salvar Hábito
+        <button type="submit" class="premium-submit-btn">
+          Salvar Hábito 
+          <img src="https://img.icons8.com/?size=100&id=98967&format=png&color=ffffff" class="btn-icon" alt="check">
         </button>
 
       </form>
@@ -161,186 +175,223 @@ const createHabit = async () => {
 
 
 <style scoped>
-/* 1. BACKGROUND GERAL E CONTAINER PRINCIPAL */
-.main-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 40px 20px;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #0f0f0f, #1e0b3e);
-}
-
-.page-header {
-    font-size: 36px;
-    color: #c37eff; /* Cor roxa primária */
-    margin-bottom: 30px;
-    font-weight: bold;
-}
-
-/* 2. CARD PRINCIPAL (form-card) */
-.form-card {
-  width: 100%;
-  max-width: 600px; /* Largura para acomodar bem os campos */
-  background-color: #1a1a1a; 
-  border-radius: 20px;
-  padding: 30px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 
-              0 0 0 4px rgba(70, 0, 100, 0.5); 
-  color: white;
-  text-align: left;
-}
-
-/* 3. ESTILO DOS GRUPOS DE SECÇÕES */
-.section-group {
-    margin-bottom: 25px;
-    padding: 15px;
-    background-color: #2b2b2b;
-    border-radius: 10px;
-    border-left: 5px solid #a052ff; /* Roxo primário */
-}
-
-.label-title {
-    display: block;
-    font-size: 14px;
-    color: #c37eff;
-    margin-bottom: 8px;
-    font-weight: bold;
-}
-
-.input-field {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid #444;
-    border-radius: 8px;
-    background-color: #333;
-    color: white;
-    font-size: 16px;
-    box-sizing: border-box;
-}
-
-.input-field:focus {
-    border-color: #9955ff;
-    box-shadow: 0 0 0 3px rgba(153, 85, 255, 0.4);
-    outline: none;
-}
-
-/* 4. ESTILOS DE GOAL E DATAS/HORAS */
-.goal-input-group, .date-input-group {
-    display: flex;
-    gap: 15px;
-}
-
-.goal-value-input {
-    width: 30%;
-    text-align: center;
-}
-
-.goal-unit-select {
-    width: 70%;
-}
-
-.date-field {
-    flex: 1;
-}
-
-.date-field label {
-    display: block;
-    color: #ccc;
-    font-size: 12px;
-    margin-bottom: 5px;
-}
-
-.mt-3 {
-    margin-top: 15px;
-}
-
-.category-display {
-    background-color: #a052ff;
-    color: white;
-    padding: 8px 15px;
-    border-radius: 6px;
-    display: inline-block;
-    font-weight: bold;
-}
-
-/* 5. ESTILO DO BOTÃO SUBMIT */
-.submit-btn {
-    width: 100%;
-    padding: 15px;
-    background: linear-gradient(90deg, #9955ff, #c37eff);
-    border: none;
-    border-radius: 10px;
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-    margin-top: 25px;
-}
-
-.submit-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(153, 85, 255, 0.4);
-}
-
-/* 6. MENSAGENS DE FEEDBACK */
-.error-msg, .success-msg {
-    margin-top: 15px;
-    padding: 10px;
-    border-radius: 8px;
-    text-align: center;
-    font-weight: bold;
-}
-.error-msg { 
-    background-color: #4f0000; 
-    color: #ff8888; 
-    border: 1px solid #ff0000;
-}
-.success-msg { 
-    background-color: #004f00; 
-    color: #88ff88; 
-    border: 1px solid #00ff00;
-}
-/* Estilo para o Seletor de Categorias */
-.category-selector {
-    display: flex;
-    gap: 15px;
-    margin-top: 10px;
-}
-
-.category-option {
-    flex: 1;
-    cursor: pointer;
-    position: relative;
-}
-
-.hidden-radio {
-    position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.option-content {
-    display: block;
-    padding: 12px;
-    text-align: center;
-    background-color: #333;
-    border: 1px solid #444;
-    border-radius: 8px;
-    color: #ccc;
-    font-weight: bold;
-    transition: all 0.3s ease;
-}
-.category-option:hover .option-content {
-    border-color: #9955ff;
-    background-color: #3d3d3d;
-}
-.category-option.active .option-content {
-    background: linear-gradient(90deg, #9955ff, #c37eff); 
-    color: white;
-    border-color: transparent;
-    box-shadow: 0 4px 10px rgba(153, 85, 255, 0.3);
-}
-</style>
+  /* 1. CONTAINER PRINCIPAL E FUNDO */
+  .main-container {
+      padding: 120px 20px 60px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      /* Radial gradient para dar profundidade ao fundo escuro */
+      background: radial-gradient(circle at top, #1e0b3e 0%, #0f0f0f 100%);
+  }
+  
+  .page-header-section {
+      text-align: center;
+      margin-bottom: 30px;
+  }
+  
+  .header-icon { 
+      width: 50px; 
+      height: 50px;
+      margin-bottom: 10px; 
+  }
+  
+  .premium-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, #ffffff, #c37eff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 0;
+  }
+  
+  .subtitle { 
+      color: rgba(255, 255, 255, 0.6); 
+      margin-top: 10px;
+  }
+  
+  /* 2. CARD GLASSMORPHISM */
+  .glass-effect {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 25px;
+      padding: 35px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  }
+  
+  /* 3. GRUPOS DE INPUT E LABELS */
+  .input-group { 
+      margin-bottom: 30px; 
+  }
+  
+  .label-title {
+      color: #c37eff;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+      display: block;
+  }
+  
+  .premium-input {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 14px 15px;
+      color: white;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+  }
+  
+  .premium-input:focus {
+      outline: none;
+      border-color: #c37eff;
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 0 15px rgba(195, 126, 255, 0.2);
+  }
+  
+  .premium-input.with-icon { 
+      padding-left: 45px; 
+  }
+  
+  /* 4. GRID DE DATAS E HELPERS */
+  .date-grid { 
+      display: grid; 
+      grid-template-columns: 1fr 1fr; 
+      gap: 20px; 
+  }
+  
+  .date-field { 
+      position: relative; 
+      display: flex; 
+      align-items: center;
+      margin-top: 10px; 
+  }
+  
+  .date-helper {
+      position: absolute;
+      top: -18px;
+      left: 2px;
+      font-size: 0.65rem;
+      color: rgba(255, 255, 255, 0.4);
+      font-weight: 700;
+      text-transform: uppercase;
+  }
+  
+  .field-icon-svg { 
+      position: absolute; 
+      left: 15px; 
+      width: 18px; 
+      height: 18px;
+      pointer-events: none; 
+      opacity: 0.9;
+  }
+  
+  /* 5. SELECTOR DE AMBIENTE (TOGGLE) */
+  .environment-toggle {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 6px;
+      border-radius: 14px;
+  }
+  
+  .toggle-option {
+      padding: 12px;
+      text-align: center;
+      cursor: pointer;
+      border-radius: 10px;
+      color: rgba(255, 255, 255, 0.5);
+      font-weight: 600;
+      transition: all 0.3s ease;
+  }
+  
+  .toggle-option.active {
+      background: #c37eff;
+      color: white;
+      box-shadow: 0 4px 15px rgba(195, 126, 255, 0.3);
+  }
+  
+  .toggle-option.active .toggle-icon { 
+      filter: brightness(0) invert(1); 
+  }
+  
+  .option-content { 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      gap: 8px; 
+  }
+  
+  .toggle-icon { width: 20px; height: 20px; }
+  .hidden-radio { display: none; }
+  
+  /* 6. BOTÃO SUBMIT */
+  .premium-submit-btn {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(90deg, #9955ff, #c37eff);
+      color: white;
+      border: none;
+      border-radius: 15px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+  
+  .premium-submit-btn:hover { 
+      transform: translateY(-3px); 
+      box-shadow: 0 10px 20px rgba(153, 85, 255, 0.4);
+  }
+  
+  .btn-icon { width: 20px; margin-left: 10px; }
+  
+  /* 7. MENSAGENS E ANIMAÇÕES */
+  .message-container { 
+      min-height: 60px; 
+      display: flex;
+      align-items: center;
+  }
+  
+  .alert-msg { 
+      width: 100%;
+      padding: 12px; 
+      border-radius: 10px; 
+      text-align: center; 
+      font-size: 0.9rem; 
+      font-weight: 600;
+  }
+  
+  .alert-msg.error { 
+      background: rgba(255, 77, 77, 0.1); 
+      color: #ff4d4d; 
+      border: 1px solid rgba(255, 77, 77, 0.2); 
+  }
+  
+  .alert-msg.success { 
+      background: rgba(0, 212, 99, 0.1); 
+      color: #00d463; 
+      border: 1px solid rgba(0, 212, 99, 0.2); 
+  }
+  
+  .fade-enter-active, .fade-leave-active { transition: all 0.3s ease; }
+  .fade-enter-from, .fade-leave-to { opacity: 0; transform: translateY(-10px); }
+  
+  input[type="date"]::-webkit-calendar-picker-indicator {
+      cursor: pointer;
+      filter: invert(1) sepia(100%) saturate(500%) hue-rotate(240deg);
+      opacity: 0.6;
+  }
+  </style>
