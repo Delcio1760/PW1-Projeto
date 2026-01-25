@@ -58,8 +58,7 @@ const updatePassword = async () => {
     }
 };
 
-const xpMax = user.level *100
-const xpPercent = Math.min((user.xp/xpMax)*100, 100);
+
 const badges = [
   {
     name:'Bronze',
@@ -75,7 +74,7 @@ const badges = [
   },
   {
     name:'Platina',
-    minXp: 700,
+    minXP: 700,
     icon: 'https://img.icons8.com/color/48/jewel.png',
     class:'badge-platina'
   },
