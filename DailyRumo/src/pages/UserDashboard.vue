@@ -12,13 +12,13 @@
         <div class="card profile-card">
           <div class="user-info">
             <h2>Olá, {{ user.nome }}!</h2>
-            <span class="level-badge">Nível {{ user.level }}</span>
+            <span class="level-badge">{{ currentBadgeName }}</span>
           </div>
           
           <div class="xp-section">
             <div class="xp-labels">
-              <span>XP Atual</span>
-              <span>{{ user.xp }} / {{ xpMax }}</span>
+              <span>{{ nextBadge ? `Próximo: ${nextBadge.name}` :'Nível Máximo' }}</span>
+              <span>{{ user.xp }} / {{ xpMax }}XP</span>
             </div>
             <div class="progress-bar">
               <div class="progress-fill" :style="{ width: xpPercent + '%' }"></div>
@@ -64,8 +64,32 @@ Chart.register(...registerables)
 const authStore = useAuthStore();
 const user = authStore.user;
 
-const xpMax = computed(()=> user.level *100);
-const xpPercent = computed(() => Math.min((user.xp / xpMax.value) * 100, 100));
+const badges = [
+  { name: 'Bronze', minXP: 0 },
+  { name: 'Ouro', minXP: 300 },
+  { name: 'Platina', minXP: 700 },
+  { name: 'Diamante', minXP: 1200 },
+  { name: 'Mestre', minXP: 2000 }
+];
+
+// Encontra o proximo badge com base no XP atual
+const nextBadge = computed(()=> {
+  return badges.find(b=> user.xp < b.minXP) || null;
+});
+
+// Define o maximo da barra (o minino do proximo badge ou XP se for Mestre)
+const xpMax = computed(()=> nextBadge.value ? nextBadge.value.minXP : user.xp);
+
+// Calcula Percentagem
+const xpPercent = computed(()=>{
+  if(!nextBadge.value) return 100; // Se for Mestre, barra cheia
+  return Math.min((user.xp / nextBadge.value.minXP)*100,100)
+});
+
+const currentBadgeName = computed(() => {
+  const current = [...badges].reverse().find(b => user.xp >= b.minXP);
+  return current ? current.name : 'Iniciante';
+});
 
 // Estatisticas : Check-ins da semana
 const weeklyCompletions = ref(0);
