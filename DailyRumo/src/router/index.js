@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../pages/Home.vue'
 import Registrar from '@/pages/Registrar.vue'
 import AboutUs from "../pages/AboutUs.vue"
+import { useAuthStore } from '@/stores/authStore'
 
 
 
@@ -52,7 +53,23 @@ const routes = [
 ]
 
 
-export default createRouter({
+const router = createRouter({
   history: createWebHistory(),
   routes
+});
+
+// Guarda de Navegação
+router.beforeEach((to,from,next)=>{
+  const auth = useAuthStore()
+
+  const publicPages = ['/','/login','/register','/contacto','/sobre'];
+  const isPublic = publicPages.includes(to.path);
+
+  if(!isPublic && !auth.user){
+    next('/login');
+  }else{
+    next();
+  }
 })
+
+export default router
