@@ -50,27 +50,44 @@ const loadWeeklyChart = async () => {
 
     counts.push(userCompletions.filter(c => c.date === day).length);
   }
-  new Chart(weeklyChart.value,{
-    type: "line",
-    data: {
-      labels: days,
-      datasets: [
-        {
-          label: "Check-ins",
-          data: counts,
-          borderWidth: 3,
-          tension: 0.4,
-          fill: true,
-        }
-      ]
+  // Localiza a função loadWeeklyChart e altera as options do New Chart:
+new Chart(weeklyChart.value, {
+  type: "line",
+  data: {
+    labels: days,
+    datasets: [
+      {
+        label: "Check-ins",
+        data: counts,
+        borderColor: "#c37eff", 
+        backgroundColor: "rgba(195, 126, 255, 0.2)", 
+        borderWidth: 4,
+        tension: 0.4,
+        fill: true,
+        pointBackgroundColor: "#fff",
+        pointRadius: 5
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false, // Permite que o gráfico cresça em altura
+    plugins: {
+      legend: { display: false }
     },
-    options:{
-      responsive: true,
-      plugins: {
-        legend: {display: false}
+    scales: {
+      y: {
+        beginAtZero: true,
+        ticks: { color: "rgba(255,255,255,0.5)" },
+        grid: { color: "rgba(255,255,255,0.05)" }
+      },
+      x: {
+        ticks: { color: "rgba(255,255,255,0.5)" },
+        grid: { display: false }
       }
     }
-  });
+  }
+});
 };
  onMounted(async() =>{
   if(authStore.user){
@@ -356,19 +373,28 @@ const loadWeeklyChart = async () => {
     .cards-wrapper { flex-direction: column; align-items: center; }
     h1 { font-size: 2.2rem; }
   }
-  .home-chart-card {
-  margin-top: 40px;
-  padding: 32px;
-  border-radius: 20px;
+
+.home-chart-card {
+  margin-top: 60px; 
+  padding: 40px;
+  border-radius: 32px; 
   background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%; 
+  box-sizing: border-box;
+}
+
+.home-chart-card canvas {
+  width: 100% !important;
+  height: 400px !important; /* Força uma altura maior */
 }
 
 .home-chart-card h3 {
   font-family: "Poppins", sans-serif;
-  margin-bottom: 20px;
-  font-size: 1.3rem;
+  margin-bottom: 30px;
+  font-size: 1.5rem; 
+  color: #fff;
 }
 .weather-loc {
   display: flex;
