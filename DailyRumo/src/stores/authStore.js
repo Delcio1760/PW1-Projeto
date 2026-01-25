@@ -2,6 +2,7 @@ import { defineStore } from "pinia"; // Importa a função defineStore da biblio
 
 export const useAuthStore = defineStore("auth", {  // Aqui definimos a store chamada "auth"
     state: () => ({user : null}),                  // Estado inicial da store, com a propriedade "user" definida como null
+    persist: true,
     actions: {
         async login(email, password){ // Aqui definimos a ação de login como uma função assíncrona que recebe email e password
             const res = await fetch(`http://localhost:3000/users?email=${email}&password=${password}`); // Faz uma requisição para o servidor para autenticar o usuário , await fetch espera a resposta da promessa
