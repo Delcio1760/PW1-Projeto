@@ -1,6 +1,6 @@
 <script setup>
 import { useAuthStore } from "../stores/authStore";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
 
 const auth = useAuthStore();
@@ -97,6 +97,9 @@ const currentBadge = badges
   .slice()
   .reverse()
   .find(badge => user.xp >= badge.minXP);
+const nextBadge = computed(()=> {
+  return badges.find(badge => user.xp < badge.minXP)
+})
 </script>
 
 <template>

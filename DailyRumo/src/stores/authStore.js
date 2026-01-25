@@ -33,18 +33,16 @@ export const useAuthStore = defineStore("auth", {  // Aqui definimos a store cha
             if(!this.user) return;
 
             this.user.xp += amount
-            const xpNeeded = this.user.level * 100;
-            if(this.user.xp >= xpNeeded){
-                this.user.level += 1;
-                this.user.xp -= xpNeeded 
+           
+            try{
+                await fetch(`http://localhost:3000/users/${this.user.id}`, {
+                    method: "PUT",
+                    headers: {"Content-Type":"application/json"},
+                    body: JSON.stringify(this.user)
+                });
+            }catch(error){
+                console.error("Erro ao atualizar XP", error)
             }
-
-            // Guarda no backend
-        fetch(`http://localhost:3000/users/${this.user.id}`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(this.user)
-          });
         }
         
 
