@@ -130,8 +130,13 @@ const nextBadge = computed(()=> {
                 <img src="https://img.icons8.com/color/48/star-trek-symbol.png" alt="nivel" class="detail-icon-img" />
               </div>
               <div class="info">
-                <label>Nível</label>
-                <p class="level-text">Nível {{ user.level }}</p>
+                <label>Próximo Objetivo</label>
+                <p class="level-text" v-if="nextBadge">
+                  Faltam <strong>{{ nextBadge.minXP - user.xp }}XP</strong> para {{ nextBadge.name }}
+                </p>
+                <p class="level-text" v-else>
+                  Nível Máximo Atingido!
+                </p>
               </div>
           </div>
   
