@@ -62,7 +62,7 @@ npm run dev
 
 ## Membros do Grupo
 
- Délcio Cunha - 40240378
+Délcio Cunha - 40240378
 
 Marcio Tavares - 40240379
 
