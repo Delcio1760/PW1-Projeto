@@ -68,7 +68,7 @@ const createHabit = async () => {
     }
     const createdHabit = await response.json();
     
-    success.value = "✅ Hábito criado com sucesso!";
+    success.value = "Hábito criado com sucesso!";
     setTimeout(()=>{router.push(`/habits/${createdHabit.id}`)},2000);  /* Pus esse timeout para dar algum tempo para puder
                                                                        visualizar a mensagem de sucesso depois da criação do habito */
     habitName.value = "";

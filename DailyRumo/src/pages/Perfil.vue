@@ -28,11 +28,11 @@ const updatePassword = async () => {
     passwordMsg.value = '';
     
     if(newPassword.value === ''){
-        passwordMsg.value = '❌ A nova palavra-passe não pode estar vazia.';
+        passwordMsg.value = 'A nova palavra-passe não pode estar vazia.';
         return;
     }
     if(newPassword.value !== confirmPassword.value){
-        passwordMsg.value = '❌ As palavras-passe não coincidem.';
+        passwordMsg.value = 'As palavras-passe não coincidem.';
         return;
     }
     const updateUser = {
@@ -52,9 +52,9 @@ const updatePassword = async () => {
         }
         newPassword.value = '';
         confirmPassword.value = '';
-        passwordMsg.value = '✅ Palavra-passe atualizada com sucesso!';
+        passwordMsg.value = 'Palavra-passe atualizada com sucesso!';
     }catch(error){
-        passwordMsg.value = `❌ ${error.message}`;
+        passwordMsg.value = `${error.message}`;
     }
 };
 

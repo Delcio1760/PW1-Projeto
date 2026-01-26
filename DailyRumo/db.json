@@ -6,7 +6,7 @@
       "email": "delcio@gmail.com",
       "password": "Delcio123",
       "level": 4,
-      "xp": 360
+      "xp": 380
     },
     {
       "id": "2",
@@ -127,6 +127,16 @@
       "userId": "4",
       "startTime": "00:00",
       "endTime": "23:59"
+    },
+    {
+      "id": "d087",
+      "name": "Aprender Alemão",
+      "start": "2026-01-26",
+      "end": "2026-01-28",
+      "category": "indoor",
+      "userId": "1",
+      "startTime": "00:00",
+      "endTime": "23:59"
     }
   ],
   "completions": [
@@ -218,6 +228,12 @@
       "id": "1ab4",
       "userId": "1",
       "habitId": "fde3",
+      "date": "2026-01-26"
+    },
+    {
+      "id": "9786",
+      "userId": "1",
+      "habitId": "d087",
       "date": "2026-01-26"
     }
   ]
