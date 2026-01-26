@@ -6,7 +6,7 @@
       "email": "delcio@gmail.com",
       "password": "Delcio123",
       "level": 4,
-      "xp": 340
+      "xp": 360
     },
     {
       "id": "2",
@@ -30,7 +30,7 @@
       "email": "rui@outlook.com",
       "password": "Rui2024xx",
       "level": 3,
-      "xp": 250
+      "xp": 290
     },
     {
       "id": "5",
@@ -107,6 +107,26 @@
       "userId": "1",
       "startTime": "00:00",
       "endTime": "23:59"
+    },
+    {
+      "id": "ec39",
+      "name": "Ler uma pagina de um livro por dia",
+      "start": "2026-01-26",
+      "end": "2026-01-28",
+      "category": "indoor",
+      "userId": "4",
+      "startTime": "00:00",
+      "endTime": "23:59"
+    },
+    {
+      "id": "7029",
+      "name": "Jogar futebol ",
+      "start": "2026-01-26",
+      "end": "2026-01-28",
+      "category": "outdoor",
+      "userId": "4",
+      "startTime": "00:00",
+      "endTime": "23:59"
     }
   ],
   "completions": [
@@ -181,6 +201,24 @@
       "userId": "1",
       "habitId": "fde3",
       "date": "2026-01-25"
+    },
+    {
+      "id": "47cd",
+      "userId": "4",
+      "habitId": "ec39",
+      "date": "2026-01-26"
+    },
+    {
+      "id": "ab02",
+      "userId": "4",
+      "habitId": "7029",
+      "date": "2026-01-26"
+    },
+    {
+      "id": "1ab4",
+      "userId": "1",
+      "habitId": "fde3",
+      "date": "2026-01-26"
     }
   ]
 }

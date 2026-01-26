@@ -121,7 +121,7 @@ const handlePopupClose = () => {
 
        <div v-else-if="categorizedHabits.length === 0" class="empty-state">
            <p>Parece que ainda não tem hábitos de **{{ category.toUpperCase() }}**.</p>
-           <p>Clique em **"Criar Novo Hábito"** para começar a tua jornada!</p>
+           <p>Clique no botão da Barra de Navegação para começar a tua jornada!</p>
        </div>
 
        <div class="habits-grid" v-else>

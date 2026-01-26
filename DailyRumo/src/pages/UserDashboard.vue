@@ -128,7 +128,7 @@ const calculateStreaks = (completions) =>{
     const previos = new Date(uniqueDates[i-1])
     const currentDate = new Date(uniqueDates[i])
 
-    const difference = (currentDate - previos) / (1000*60*60*24)
+    const difference = (currentDate - previos) / (1000*60*60*24) // Diferença em milissegundos convertida para dias
 
     if(difference === 1){
       streak++

@@ -1,5 +1,6 @@
 import { defineStore } from "pinia"; // Importa a função defineStore da biblioteca Pinia
 
+
 export const useAuthStore = defineStore("auth", {  // Aqui definimos a store chamada "auth"
     state: () => ({user : null}),                  // Estado inicial da store, com a propriedade "user" definida como null
     persist: true,
@@ -43,6 +44,19 @@ export const useAuthStore = defineStore("auth", {  // Aqui definimos a store cha
                 });
             }catch(error){
                 console.error("Erro ao atualizar XP", error)
+            }
+        },
+
+        async updateName(newName){
+            const response = await fetch(`http://localhost:3000/users/${this.user.id}`,{
+                method: 'PATCH',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({nome : newName})
+            });
+
+            if(response.ok){
+                const updateUser = await response.json();
+                this.user = updateUser
             }
         }
         

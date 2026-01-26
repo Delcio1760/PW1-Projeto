@@ -58,6 +58,18 @@ const updatePassword = async () => {
     }
 };
 
+const newName = ref(auth.user.nome);
+const nameMsg = ref('');
+
+const updateName = async () => {
+  try {
+    
+    await auth.updateName(newName.value); 
+    nameMsg.value = "Nome atualizado!";
+  } catch(e) {
+    nameMsg.value = "Erro ao mudar o nome!";
+  }
+};
 
 const badges = [
   {
@@ -124,6 +136,22 @@ const nextBadge = computed(()=> {
                 <p>{{ user.email }}</p>
               </div>
             </div>
+
+            <div class="detail-group">
+    <div class="icon-wrapper">
+      <img src="https://img.icons8.com/?size=100&id=gYI9v0NbFgxC&format=png&color=000000" alt="edit" class="detail-icon-img" />
+    </div>
+      <div class="info">
+      <label>Alterar Nome</label>
+      <div class="name-edit-container">
+        <input v-model="newName" type="text" class="name-input" placeholder="Novo nome..." />
+        <button @click="updateName" class="save-name-btn">Salvar</button>
+      </div>
+      <p v-if="nameMsg" :class="nameMsg.startsWith('✅') ? 'msg-success-mini' : 'msg-error-mini'">
+        {{ nameMsg }}
+      </p>
+      </div>
+      </div>
   
             <div class="detail-group">
               <div class="icon-wrapper">
@@ -536,5 +564,54 @@ const nextBadge = computed(()=> {
 }
 .badge-mestre { border: 2px solid #c084fc; box-shadow: 0 0 15px rgba(192, 132, 252, 0.1); }
 
+.name-edit-container {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.name-input {
+  background-color: #2b2b2b; /* Mesma cor dos teus inputs de password */
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 6px 12px;
+  color: white;
+  font-size: 14px;
+  width: 100%;
+}
+
+.name-input:focus {
+  border-color: #9955ff;
+  outline: none;
+}
+
+.save-name-btn {
+  background: linear-gradient(90deg, #9955ff, #c37eff);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 15px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 13px;
+  transition: transform 0.2s;
+}
+
+.save-name-btn:hover {
+  transform: scale(1.05);
+}
+
+/* Mensagens de feedback menores para a coluna lateral */
+.msg-error-mini {
+  color: #ff8888;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.msg-success-mini {
+  color: #88ff88;
+  font-size: 12px;
+  margin-top: 5px;
+}
 
 </style>
