@@ -62,9 +62,9 @@ npm run dev
 
 ## Membros do Grupo
 
-## Délcio Cunha - 40240378
+ Délcio Cunha - 40240378
 
-## Marcio Tavares - 40240379
+Marcio Tavares - 40240379
 
 ## Testes
 Para correr os testes unitários e garantir que o sistema de XP está a funcionar:
