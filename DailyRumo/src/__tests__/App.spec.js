@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest'
+import { createTestingPinia } from '@pinia/testing'
 
 import { mount } from '@vue/test-utils'
 import App from '../App.vue'
