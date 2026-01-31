@@ -1,22 +1,22 @@
 <script setup>
-import NavBar from "./components/NavBar.vue";
+import { ref } from 'vue';
 import NavbarLogin from "./components/NavbarLogin.vue";
+import NavBar from "./components/NavBar.vue";
+import ChatBox from "./components/ChatBox.vue";
 import { useAuthStore } from "./stores/authStore";
-import { useRoute } from 'vue-router';
-const $route = useRoute();
 
 const auth = useAuthStore();
+const isChatOpen = ref(false); 
 </script>
 
 <template>
   <div>
-    <!--user logado-->
-    <NavbarLogin v-if="auth.user" />
+    <NavbarLogin v-if="auth.user" @toggle-chat="isChatOpen = !isChatOpen" />
+    <NavBar v-else @toggle-chat="isChatOpen = !isChatOpen" />
 
-    <!--User não logado-->
-    <NavBar v-else />
+    <router-view /> 
 
-    <router-view :key="$route.fullPath" /> 
+    <ChatBox :isOpen="isChatOpen" @close="isChatOpen = false" />
   </div>
 </template>
 

@@ -127,6 +127,29 @@ p {
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(195, 126, 255, 0.4), transparent);
 }
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent; /* Remove o flash azul ao clicar no iPhone */
+}
+
+/* Base responsiva */
+html {
+  font-size: 16px; /* Base para desktop */
+}
+
+/* Breakpoint para a maioria dos telemóveis (iPhone 11 até 17 Pro Max e Androids) */
+@media screen and (max-width: 480px) {
+  html {
+    font-size: 14px; /* Reduz as fontes e espaçamentos globalmente */
+  }
+  
+  body {
+    /* Evita o scroll lateral indesejado */
+    overflow-x: hidden;
+    width: 100%;
+  }
+}
   
   
     

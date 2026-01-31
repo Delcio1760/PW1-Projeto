@@ -4,7 +4,7 @@
       <div class="nav-links">
         <router-link to="/" class="nav-item">Home</router-link>
         <router-link to="/contacto" class="nav-item">Contacto</router-link>
-        <router-link to="/sobre"class="nav-item">Sobre Nós</router-link>
+        <router-link to="/sobre" class="nav-item">Sobre Nós</router-link>
         </div>
       
       <div class="nav-auth">
@@ -91,15 +91,25 @@
     filter: brightness(1.1);
   }
   
-  @media (max-width: 700px) {
-    .navBar {
-      min-width: 90%;
-      height: 65px;
-      padding: 0 20px;
-    }
-    .nav-links {
-      gap: 20px;
-    }
+  @media screen and (max-width: 850px) {
+  .navBar {
+    padding: 10px;
+    height: auto;
+    flex-direction: column; /* Empilha o logo e os links se necessário */
+    gap: 15px;
   }
+
+  .nav-links {
+    display: none; 
+    display: flex;
+    gap: 8px;
+    font-size: 12px;
+  }
+
+  .nav-auth {
+    width: 100%;
+    justify-content: center; /* Centraliza os botões no telemóvel */
+  }
+}
   </style>
   

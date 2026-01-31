@@ -1,5 +1,5 @@
 <template>
-  <div class="nav-container">
+<div class="nav-container">
     <nav class="navBar">
       <div class="nav-links">
         <router-link to="/" class="nav-item">Home</router-link>
@@ -14,12 +14,20 @@
             <img src="https://img.icons8.com/?size=100&id=14092&format=png&color=c37eff" alt="Criar Hábito" />
           </button>
         </div>
+
+        <div class="chat-bot">
+          <button class="chatBot-btn" @click="$emit('toggle-chat')">
+            <img src="https://img.icons8.com/?size=100&id=IuR8B5VlsFxh&format=png&color=FFFFFF" alt="botão de chat-bot" />
+          </button>
+        </div>
+
         <button v-if="auth.user" @click="logout" class="auth-btn logout">Sair</button>
         <router-link v-else to="/login" class="auth-btn login">Login</router-link>
+
       </div>
 
     </nav>
-  </div>
+</div>
 </template>
 
 <script setup>
@@ -38,6 +46,9 @@ const goToCreateHabit = () => {
     params: { category: 'indoor' }
   });
 };
+
+defineEmits(['toggle-chat']);
+
 </script>
   
 <style scoped>
@@ -133,7 +144,7 @@ const goToCreateHabit = () => {
 .nav-auth {
   display: flex;
   align-items: center;
-  gap: 15px; /* Espaço entre o botão de criar e o de sair */
+  gap: 13px; /* Espaço entre o botão de criar e o de sair */
 }
 
 .create-habit {
@@ -169,19 +180,64 @@ const goToCreateHabit = () => {
 .btn-create:active {
   transform: scale(0.95);
 }
+
+/* Botão do ChatBot */
+.chat-bot {
+  display: flex;
+  align-items: center;
+}
+
+.chatBot-btn {
+  width: 45px;
+  height: 45px;
+  border-radius: 12px; /* Formato quadrado arredondado para diferenciar do círculo */
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.chatBot-btn img {
+  width: 28px;
+  height: 28px;
+  /* Se o ícone for preto, isto torna-o branco para combinar com o tema escuro */
+  filter: invert(100%) sepia(0%) substitute(0,0,0); 
+}
+
+.chatBot-btn:hover {
+  background: rgba(0, 200, 255, 0.2); /* Um azul ciano suave para o bot */
+  border-color: #00c8ff;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 200, 255, 0.4);
+}
+
+.chatBot-btn:active {
+  transform: scale(0.9);
+}
   
-  /* Responsividade */
-  @media (max-width: 800px) {
-    .navBar {
-      min-width: 95%;
-      height: 65px;
-      padding: 0 20px;
-    }
-    .nav-links {
-      gap: 15px;
-    }
-    .nav-item {
-      font-size: 16px;
-    }
+/* Responsividade */
+@media screen and (max-width: 850px) {
+  .navBar {
+    padding: 10px;
+    height: auto;
+    flex-direction: column; /* Empilha o logo e os links se necessário */
+    gap: 15px;
   }
+
+  .nav-links {
+    display: none; 
+    display: flex;
+    gap: 8px;
+    font-size: 12px;
+  }
+
+  .nav-auth {
+    width: 100%;
+    justify-content: center; /* Centraliza os botões no telemóvel */
+  }
+}
   </style>
