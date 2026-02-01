@@ -1,0 +1,240 @@
+{
+    "users": [
+      {
+        "id": "1",
+        "nome": "Delcio",
+        "email": "delcio@gmail.com",
+        "password": "Delcio123",
+        "level": 4,
+        "xp": 700
+      },
+      {
+        "id": "2",
+        "nome": "Marcio",
+        "email": "marcio@yahoo.com",
+        "password": "Marcio456",
+        "level": 0,
+        "xp": 0
+      },
+      {
+        "id": "3",
+        "nome": "Ana",
+        "email": "ana@icloud.com",
+        "password": "AnaPass99",
+        "level": 1,
+        "xp": 50
+      },
+      {
+        "id": "4",
+        "nome": "Rui",
+        "email": "rui@outlook.com",
+        "password": "Rui2024xx",
+        "level": 3,
+        "xp": 290
+      },
+      {
+        "id": "5",
+        "nome": "Sofia",
+        "email": "sofia@gmail.com",
+        "password": "Sofia321",
+        "level": 0,
+        "xp": 10
+      },
+      {
+        "id": "6",
+        "nome": "Pedro",
+        "email": "pedro@yahoo.com",
+        "password": "Pedro777",
+        "level": 2,
+        "xp": 180
+      },
+      {
+        "id": "4611",
+        "nome": "Scar",
+        "email": "Scar@gmail.com",
+        "password": "Scar12345",
+        "xp": 0,
+        "level": 1
+      }
+    ],
+    "habits": [
+      {
+        "id": "f4e0",
+        "name": "Correr 10Km",
+        "start": "2026-01-09",
+        "end": "2026-01-10",
+        "category": "outdoor",
+        "userId": "1",
+        "startTime": "00:00",
+        "endTime": "23:59"
+      },
+      {
+        "id": "1c96",
+        "name": "Caminhar por 30min",
+        "start": "2026-01-09",
+        "end": "2026-01-10",
+        "category": "outdoor",
+        "userId": "1",
+        "startTime": "00:00",
+        "endTime": "23:59"
+      },
+      {
+        "id": "1f06",
+        "name": "chapada",
+        "start": "2026-01-13",
+        "end": "2026-01-24",
+        "category": "outdoor",
+        "userId": "1",
+        "startTime": "00:00",
+        "endTime": "23:59"
+      },
+      {
+        "id": "fde3",
+        "name": "jndjdn",
+        "start": "2026-01-13",
+        "end": "2026-01-26",
+        "category": "indoor",
+        "userId": "1",
+        "startTime": "00:00",
+        "endTime": "23:59"
+      },
+      {
+        "id": "255f",
+        "name": "Beber 3L de agua",
+        "start": "2026-01-22",
+        "end": "2026-01-25",
+        "category": "indoor",
+        "userId": "1",
+        "startTime": "00:00",
+        "endTime": "23:59"
+      },
+      {
+        "id": "ec39",
+        "name": "Ler uma pagina de um livro por dia",
+        "start": "2026-01-26",
+        "end": "2026-01-28",
+        "category": "indoor",
+        "userId": "4",
+        "startTime": "00:00",
+        "endTime": "23:59"
+      },
+      {
+        "id": "7029",
+        "name": "Jogar futebol ",
+        "start": "2026-01-26",
+        "end": "2026-01-28",
+        "category": "outdoor",
+        "userId": "4",
+        "startTime": "00:00",
+        "endTime": "23:59"
+      },
+      {
+        "id": "d087",
+        "name": "Aprender Alemão",
+        "start": "2026-01-26",
+        "end": "2026-01-28",
+        "category": "indoor",
+        "userId": "1",
+        "startTime": "00:00",
+        "endTime": "23:59"
+      }
+    ],
+    "completions": [
+      {
+        "id": "fbab",
+        "userId": "1",
+        "habitId": "f4e0",
+        "date": "2026-01-10"
+      },
+      {
+        "id": "3a35",
+        "userId": "1",
+        "habitId": "1c96",
+        "date": "2026-01-10"
+      },
+      {
+        "id": "44f8",
+        "userId": "1",
+        "habitId": "1f06",
+        "date": "2026-01-13"
+      },
+      {
+        "id": "73c4",
+        "userId": "1",
+        "habitId": "fde3",
+        "date": "2026-01-13"
+      },
+      {
+        "id": "88d4",
+        "userId": "1",
+        "habitId": "1f06",
+        "date": "2026-01-15"
+      },
+      {
+        "id": "4448",
+        "userId": "1",
+        "habitId": "1f06",
+        "date": "2026-01-16"
+      },
+      {
+        "id": "1116",
+        "userId": "1",
+        "habitId": "1f06",
+        "date": "2026-01-17"
+      },
+      {
+        "id": "6161",
+        "userId": "1",
+        "habitId": "1f06",
+        "date": "2026-01-22"
+      },
+      {
+        "id": "fa58",
+        "userId": "1",
+        "habitId": "fde3",
+        "date": "2026-01-22"
+      },
+      {
+        "id": "bcc3",
+        "userId": "1",
+        "habitId": "255f",
+        "date": "2026-01-22"
+      },
+      {
+        "id": "762d",
+        "userId": "1",
+        "habitId": "255f",
+        "date": "2026-01-25"
+      },
+      {
+        "id": "97b8",
+        "userId": "1",
+        "habitId": "fde3",
+        "date": "2026-01-25"
+      },
+      {
+        "id": "47cd",
+        "userId": "4",
+        "habitId": "ec39",
+        "date": "2026-01-26"
+      },
+      {
+        "id": "ab02",
+        "userId": "4",
+        "habitId": "7029",
+        "date": "2026-01-26"
+      },
+      {
+        "id": "1ab4",
+        "userId": "1",
+        "habitId": "fde3",
+        "date": "2026-01-26"
+      },
+      {
+        "id": "9786",
+        "userId": "1",
+        "habitId": "d087",
+        "date": "2026-01-26"
+      }
+    ]
+  }
