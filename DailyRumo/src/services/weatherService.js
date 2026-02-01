@@ -1,4 +1,4 @@
-const API_KEY = "e50be600a0a20fa7e72a15d3e9957335";
+const API_KEY = import.meta.env.VITE_OPENWEATHER_KEY;
 const BASE_URL = "https://api.openweathermap.org/data/2.5/weather";
 
 export async function getWeatherByCity(city) {
