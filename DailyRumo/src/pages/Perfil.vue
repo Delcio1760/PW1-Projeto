@@ -78,24 +78,36 @@ const badges = [
     icon: 'https://img.icons8.com/?size=100&id=23875&format=png&color=000000',
     class: 'badge-bronze'
   },
+ 
+  {
+    name:'Prata',
+    minXP: 100,
+    icon: "https://img.icons8.com/?size=100&id=23876&format=png&color=000000",
+    class: 'badge-prata'
+
+  },
+  
   {
     name:'Ouro',
     minXP: 300,
     icon: 'https://img.icons8.com/color/48/gold-medal.png',
     class: 'badge-ouro'
   },
+  
   {
     name:'Platina',
     minXP: 700,
-    icon: 'https://img.icons8.com/color/48/jewel.png',
+    icon: 'https://img.icons8.com/?size=100&id=Na0meIgZPWPM&format=png&color=000000',
     class:'badge-platina'
   },
+  
   {
     name: 'Diamante',
     minXP: 1200,
-    icon:'https://img.icons8.com/color/48/jewel.png',
+    icon:'https://img.icons8.com/?size=100&id=10172&format=png&color=C850F2',
     class: 'badge-diamante'
   },
+  
   {
     name: 'Mestre',
     minXP: 2000,
@@ -443,7 +455,7 @@ const nextBadge = computed(()=> {
   outline: none;
 }
 
-/* ESTILIZAÇÃO DO BOTÃO DE ATUALIZAR PASSWORD (CORRIGIDO) */
+/* ESTILIZAÇÃO DO BOTÃO DE ATUALIZAR PASSWORD */
 .update-pass-btn {
     background: linear-gradient(90deg, #9955ff, #c37eff);
     color: white;
@@ -563,6 +575,7 @@ const nextBadge = computed(()=> {
   background: linear-gradient(180deg, rgba(79, 195, 247, 0.1) 0%, transparent 100%);
 }
 .badge-mestre { border: 2px solid #c084fc; box-shadow: 0 0 15px rgba(192, 132, 252, 0.1); }
+.badge-prata {border: 2px solid  #BCC6CC; box-shadow: 0 0 15px rgba(188, 198, 204, 0.1); }
 
 .name-edit-container {
   display: flex;
