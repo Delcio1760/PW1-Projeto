@@ -4,12 +4,12 @@ import { useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/authStore'; 
 import { onMounted, defineProps } from 'vue';
 
-const props = defineProps({
+defineProps({
   category: {
     type: String,
     required: true
   }
-})
+});
 
 const router = useRouter();
 
@@ -62,7 +62,7 @@ const createHabit = async () => {
         'Content-Type': 'application/json'
     },
     body: JSON.stringify(newHabit)
-  });
+});
 
     if(!response.ok){
         throw new Error("Erro ao criar hábito. Tente novamente.");
@@ -78,9 +78,9 @@ const createHabit = async () => {
     error.value = "";
     
    
-  }catch(error){
+  }catch(err){
     success.value = "";
-    error.value = error.message;
+    error.value = err.message;
    }
 };
 

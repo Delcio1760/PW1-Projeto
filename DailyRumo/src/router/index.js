@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../pages/Home.vue'
+import Home from '../pages/HomePage.vue'
 import Registrar from '@/pages/Registrar.vue'
 import AboutUs from "../pages/AboutUs.vue"
 import { useAuthStore } from '@/stores/authStore'
@@ -10,7 +10,7 @@ const Contacto = () => import('../pages/Contacto.vue')
 const Login = () => import('../pages/Login.vue')
 const CreateHabit = () => import("../pages/CreateHabit.vue")
 const HabitsCategory = () => import("../pages/HabitsCategory.vue")
-const Profile = () => import("../pages/Perfil.vue")
+const Profile = () => import("../pages/PerfilPage.vue")
 const HabitDetail = () => import("../pages/HabitDetail.vue")
 
 const routes = [

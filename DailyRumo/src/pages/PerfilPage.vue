@@ -66,7 +66,7 @@ const updateName = async () => {
     
     await auth.updateName(newName.value); 
     nameMsg.value = "Nome atualizado!";
-  } catch(e) {
+  } catch{
     nameMsg.value = "Erro ao mudar o nome!";
   }
 };
