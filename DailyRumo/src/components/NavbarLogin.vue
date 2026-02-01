@@ -220,24 +220,45 @@ defineEmits(['toggle-chat']);
 }
   
 /* Responsividade */
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 768px) {
   .navBar {
-    padding: 10px;
-    height: auto;
-    flex-direction: column; /* Empilha o logo e os links se necessário */
-    gap: 15px;
-  }
-
-  .nav-links {
-    display: none; 
+    width: 92%;
+    margin: 10px auto;   
     display: flex;
-    gap: 8px;
-    font-size: 12px;
+    justify-content: center; 
+    gap: 15px;
+    padding: 8px 15px;
+    height: auto;
+    border-radius: 50px;  
   }
 
+ 
+  .nav-links {
+    display: flex;
+    gap: 10px;
+    margin: 0;
+  }
+
+  .nav-item {
+    font-size: 11px;
+    letter-spacing: -0.2px;
+  }
+
+  /* 3. Agrupamento dos botões da direita */
   .nav-auth {
-    width: 100%;
-    justify-content: center; /* Centraliza os botões no telemóvel */
+    display: flex;
+    gap: 8px;            
+    width: auto;          
+
+  .btn-create img, .chatBot-btn img {
+    width: 22px;
+    height: 22px;
+  }
+
+  .auth-btn.logout {
+    padding: 4px 8px;
+    font-size: 10px;
+  }
   }
 }
   </style>
