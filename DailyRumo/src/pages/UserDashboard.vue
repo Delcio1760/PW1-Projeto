@@ -93,7 +93,8 @@ const currentBadgeName = computed(() => {
 
 // Estatisticas : Check-ins da semana
 const weeklyCompletions = ref(0);
-const baseUrl = 'http://localhost:3000';
+const baseUrl = 'https://my-json-server.typicode.com/Delcio1760/PW1-Projeto';
+
 
 const currentStreak = ref(0);
 const bestStreak = ref(0);

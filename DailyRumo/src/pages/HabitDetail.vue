@@ -37,7 +37,8 @@ const isHabitFinished = computed(() => {
 
 const router = useRouter(); 
 const authStore = useAuthStore();
-const baseUrl = 'http://localhost:3000';
+const baseUrl = 'https://my-json-server.typicode.com/Delcio1760/PW1-Projeto';
+
 
 const props = defineProps({
     id: {
@@ -237,7 +238,6 @@ const deleteHabit = async () => {
   }
 
 }
-
 
 </script>
 

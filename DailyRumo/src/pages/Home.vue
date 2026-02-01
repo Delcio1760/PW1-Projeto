@@ -59,13 +59,15 @@ new Chart(weeklyChart.value, {
       {
         label: "Check-ins",
         data: counts,
-        borderColor: "#c37eff", 
+        borderColor: "#ffffff", 
         backgroundColor: "rgba(195, 126, 255, 0.2)", 
         borderWidth: 4,
         tension: 0.4,
         fill: true,
-        pointBackgroundColor: "#fff",
-        pointRadius: 5
+        pointBackgroundColor: "#ffffff",
+        pointBorderColor:"#ffffff",
+        pointRadius: 5,
+        pointHoverRadius: 8
       }
     ]
   },
@@ -74,6 +76,13 @@ new Chart(weeklyChart.value, {
     maintainAspectRatio: false, // Permite que o gráfico cresça em altura
     plugins: {
       legend: { display: false }
+    },
+    tooltip:{
+      enabled: true,
+      backgroundColor: "rgba(0, 0, 0, 0.8)",
+      titleFont: { size: 14 },
+      bodyFont: { size: 14 },
+      displayColors: false // Remove o quadradinho de cor no popup
     },
     scales: {
       y: {
@@ -85,6 +94,10 @@ new Chart(weeklyChart.value, {
         ticks: { color: "rgba(255,255,255,0.5)" },
         grid: { display: false }
       }
+    },
+    interaction:{
+      intersect: false,
+      mode: 'index'
     }
   }
 });

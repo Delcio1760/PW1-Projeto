@@ -40,7 +40,7 @@ const updatePassword = async () => {
     };
 
     try {
-        const response = await fetch(`http://localhost:3000/users/${user.id}`, {
+        const response = await fetch(`https://my-json-server.typicode.com/Delcio1760/PW1-Projeto/habits`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'

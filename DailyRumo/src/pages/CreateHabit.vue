@@ -56,13 +56,14 @@ const createHabit = async () => {
    };
 
    try{
-    const response = await fetch('http://localhost:3000/habits', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newHabit)
-    });
+    const response = await fetch(`https://my-json-server.typicode.com/Delcio1760/PW1-Projeto/habits`, {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(newHabit)
+  });
+
     if(!response.ok){
         throw new Error("Erro ao criar hábito. Tente novamente.");
     }
