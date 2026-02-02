@@ -32,7 +32,7 @@ const openCategory = (category) => {
 const weeklyChart = ref(null);
 
 const loadWeeklyChart = async () => {
-  const response = await fetch("http://localhost:3000/completions");
+  const response = await fetch("https://my-json-server.typicode.com/Delcio1760/PW1-Projeto/completions");
   const completions = await response.json();
 
   // só do user logado
@@ -108,7 +108,7 @@ new Chart(weeklyChart.value, {
     try{
     const data = await getWeatherByCity(city);
     weather.value = data;
-  }catch(err){
+  }catch{
     weatherError.value = "Não possivel carregar o tempo!";
   }
   }
@@ -382,11 +382,6 @@ new Chart(weeklyChart.value, {
   font-size: 0.9rem;
 }
 
-  @media (max-width: 768px) {
-    .cards-wrapper { flex-direction: column; align-items: center; }
-    h1 { font-size: 2.2rem; }
-  }
-
 .home-chart-card {
   margin-top: 60px; 
   padding: 40px;
@@ -395,19 +390,19 @@ new Chart(weeklyChart.value, {
   backdrop-filter: blur(15px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   width: 100%; 
+  max-width: 900px; 
   box-sizing: border-box;
 }
 
 .home-chart-card canvas {
   width: 100% !important;
-  height: 400px !important; /* Força uma altura maior */
+  height: 350px !important; 
 }
 
-.home-chart-card h3 {
-  font-family: "Poppins", sans-serif;
-  margin-bottom: 30px;
-  font-size: 1.5rem; 
-  color: #fff;
+@media (max-width: 768px) {
+  .home-chart-card canvas {
+    height: 250px !important; 
+  }
 }
 .weather-loc {
   display: flex;
@@ -440,6 +435,33 @@ new Chart(weeklyChart.value, {
   content: "°C";
   font-size: 1.5rem;
   margin-left: 5px;
-  color: #a855f7; /* Um toque de cor apenas na unidade */
+  color: #a855f7; 
+}
+
+@media (max-width: 768px) {
+  .cards-wrapper { 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 20px;
+  }
+  
+  .glass-card {
+    min-width: 100%; 
+    max-width: 100%;
+    padding: 30px 20px; 
+  }
+
+  h1 { 
+    font-size: 2rem; 
+  }
+  
+  .main-container {
+    padding: 40px 15px; 
+  }
+
+  .cta-actions {
+    flex-direction: column; 
+    width: 100%;
+  }
 }
   </style>

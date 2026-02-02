@@ -133,6 +133,12 @@ p {
   -webkit-tap-highlight-color: transparent; /* Remove o flash azul ao clicar no iPhone */
 }
 
+html, body {
+  max-width: 100%;
+  overflow-x: hidden; 
+  position: relative;
+}
+
 /* Base responsiva */
 html {
   font-size: 16px; /* Base para desktop */
@@ -140,15 +146,19 @@ html {
 
 /* Breakpoint para a maioria dos telemóveis (iPhone 11 até 17 Pro Max e Androids) */
 @media screen and (max-width: 480px) {
-  html {
-    font-size: 14px; /* Reduz as fontes e espaçamentos globalmente */
+  html, body {
+    font-size: 14px;  /* Reduz as fontes e espaçamentos globalmente */
+    max-width: 100vw;
+    overflow: hidden;
+    position: relative;
+    margin: 0;
+    padding: 0;
   }
-  
-  body {
-    /* Evita o scroll lateral indesejado */
-    overflow-x: hidden;
+  #app{
+    overflow: hidden;
     width: 100%;
   }
+  
 }
   
   
