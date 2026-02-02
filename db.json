@@ -60,8 +60,8 @@
       {
         "id": "10",
         "nome": "Marcelo Silva",
-        "email": "marcelo@email.com",
-        "password": "test",
+        "email": "marcelo@gmail.com",
+        "password": "test123",
         "level": 5,
         "xp": 820
       }
