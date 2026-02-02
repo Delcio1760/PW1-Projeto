@@ -55,7 +55,17 @@
         "password": "Scar12345",
         "xp": 0,
         "level": 1
+      },
+      
+      {
+        "id": "10",
+        "nome": "Marcelo Silva",
+        "email": "marcelo@email.com",
+        "password": "test",
+        "level": 5,
+        "xp": 820
       }
+    
     ],
     "habits": [
       {
@@ -137,8 +147,16 @@
         "userId": "1",
         "startTime": "00:00",
         "endTime": "23:59"
-      }
+      },
+      { "id": "h10", "userId": "10", "name": "Ler 20 páginas", "category": "indoor" },
+      { "id": "h11", "userId": "10", "name": "Treino de Força", "category": "indoor"},
+      { "id": "h12", "userId": "10", "name": "Beber 2L de Água", "category": "indoor"},
+      { "id": "h13", "userId": "10", "name": "Caminhada 30min", "category": "outdoor"},
+      { "id": "h14", "userId": "10", "name": "Corrida no Parque", "category": "outdoor"},
+      { "id": "h15", "userId": "10", "name": "Andar de Bicicleta", "category": "outdoor"}
     ],
+    
+    
     "completions": [
       {
         "id": "fbab",
@@ -235,6 +253,18 @@
         "userId": "1",
         "habitId": "d087",
         "date": "2026-01-26"
-      }
+      },
+
+      { "id": "m1", "userId": "10", "habitId": "h10", "date": "2026-01-27" },
+      { "id": "m2", "userId": "10", "habitId": "h13", "date": "2026-01-27" },
+      { "id": "m3", "userId": "10", "habitId": "h11", "date": "2026-01-28" },
+      { "id": "m4", "userId": "10", "habitId": "h12", "date": "2026-01-29" },
+      { "id": "m5", "userId": "10", "habitId": "h10", "date": "2026-01-30" },
+      { "id": "m6", "userId": "10", "habitId": "h14", "date": "2026-01-30" },
+      { "id": "m7", "userId": "10", "habitId": "h12", "date": "2026-01-31" },
+      { "id": "m8", "userId": "10", "habitId": "h15", "date": "2026-01-31" },
+      { "id": "m9", "userId": "10", "habitId": "h10", "date": "2026-02-01" },
+      { "id": "m10", "userId": "10", "habitId": "h13", "date": "2026-02-01" },
+      { "id": "m11", "userId": "10", "habitId": "h12", "date": "2026-02-02" }
     ]
   }
