@@ -96,7 +96,7 @@ p {
 
 /* Aspa de Abertura */
 .sugestion-quote::before {
-  content: '“';
+  content: '"';
   font-family: 'Georgia', serif;
   font-size: 4rem;
   color: #c37eff;
@@ -108,7 +108,7 @@ p {
 
 /* Aspa de Fecho */
 .sugestion-quote::after {
-  content: '”';
+  content: '"';
   font-family: 'Georgia', serif;
   font-size: 4rem;
   color: #c37eff;
@@ -130,40 +130,169 @@ p {
 
 * {
   box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent; /* Remove o flash azul ao clicar no iPhone */
+  -webkit-tap-highlight-color: transparent;
 }
 
-html, body {
-  max-width: 100%;
-  overflow-x: hidden; 
+html {
+  width: 100%;
+  overflow-x: hidden;
   position: relative;
+}
+
+body {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+#app {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Garante que NENHUM elemento ultrapasse a largura da tela */
+* {
+  max-width: 100%;
 }
 
 /* Base responsiva */
 html {
-  font-size: 16px; /* Base para desktop */
+  font-size: 16px;
 }
 
-/* Breakpoint para a maioria dos telemóveis (iPhone 11 até 17 Pro Max e Androids) */
+/* Breakpoint para a maioria dos telemóveis */
 @media screen and (max-width: 480px) {
-  html, body {
-    font-size: 14px;  /* Reduz as fontes e espaçamentos globalmente */
-    max-width: 100vw;
+  html {
+    font-size: 14px;
+    width: 100%;
+    overflow-x: hidden !important;
+  }
+  
+  body {
+    width: 100%;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+    overflow-y: auto;
     position: relative;
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
-    overflow-y: auto;
-
   }
-  #app{
-    width: 100%;
-    overflow-x: hidden;
+  
+  #app {
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
     overflow-y: auto;
     min-height: 100vh;
+    position: relative;
   }
   
+  /* Força todos os containers principais a respeitarem a largura */
+  .main-container,
+  .page-container,
+  .container {
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* Garante que cards e elementos dentro não ultrapassem */
+  .glass-card,
+  .habit-card,
+  .sugestion-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: unset !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* Fix para grids e flexbox */
+  .cards-wrapper,
+  .habits-grid {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+  
+  /* Ajustes específicos para mobile */
+  .page-container {
+    margin: 2rem auto !important;
+  }
+  
+  h1 {
+    font-size: 2rem !important;
+    word-wrap: break-word !important;
+  }
+  
+  h2 {
+    font-size: 1.5rem !important;
+    word-wrap: break-word !important;
+  }
+  
+  .sugestion-card {
+    padding: 30px 20px !important;
+    min-height: 120px !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  
+  .sugestion-quote {
+    font-size: 1.1rem !important;
+    max-width: 90% !important;
+    word-wrap: break-word !important;
+  }
+  
+  /* Ajustar aspas para mobile */
+  .sugestion-quote::before {
+    font-size: 2.5rem !important;
+    left: -15px !important;
+    top: -10px !important;
+  }
+  
+  .sugestion-quote::after {
+    font-size: 2.5rem !important;
+    right: -15px !important;
+    bottom: -30px !important;
+  }
+  
+  /* Fix para imagens e canvas (gráficos) */
+  img,
+  canvas {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+  
+  /* Fix para inputs e botões */
+  input,
+  button,
+  select,
+  textarea {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* Previne que texto longo cause overflow */
+  p, span, div, a {
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+  }
 }
-  
-  
-    
+
+/* ========================================
+   TABLET E MÉDIOS
+   ======================================== */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .main-container,
+  .page-container {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+}
