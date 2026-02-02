@@ -7,7 +7,7 @@ import Popup from "../components/PopUp.vue";
 const route = useRoute();
 const router = useRouter();
 const auth = useAuthStore();
-const baseUrl = 'http://localhost:3000'; 
+const baseUrl = 'https://my-json-server.typicode.com/Delcio1760/PW1-Projeto'; 
 
 const category = computed (() => route.params.category)
 
